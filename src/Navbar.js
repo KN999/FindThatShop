@@ -5,7 +5,7 @@ export default function Navbar () {
 
     return (
         <div className="Navbar">    
-            <nav className="navbar navbar-expand-md">
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                 <div className="collapse navbar-collapse">
                 <ul className="navbar-nav ml-auto mt-2">
                     <li className="nav-item"><a className="nav-link" href="/Register">Register</a></li>

@@ -95,25 +95,30 @@ class Register extends Component {
         
 
         return (
-            <form className='align-webkit-center' onSubmit={this.onSubmit}>
-            <div className="form-group width-30">
-                <input type='text' name='name' placeholder='Name' className='form-control'  onChange={this.onChange}/>
-            </div>
-            <div className="form-group width-30">
-                <input type='text' name='username' placeholder='Username' className='form-control'  onChange={this.onChange}/>
-            </div>
-            <div className="form-group width-30">
-                <input type='text' name='password' placeholder='Password' className='form-control'  onChange={this.onChange}/>
-            </div>
-            <div className="form-group width-30">
-                <input type='text' name='confirmpassword' placeholder='Confirm Password' className='form-control'  onChange={this.onChange}/>
-            </div>
-            <div className="form-group width-30">
-                <input type='text' name='email' placeholder='Email' className='form-control'  onChange={this.onChange}/>
-            </div>
-            <button className='btn btn-warning' type='submit'>Register</button>
-            {error && <p>{error.message}</p>}
-        </form>
+            <div>
+                <div className="jumbotron">
+                    <h1>Register</h1>
+                </div>
+                <form className='align-webkit-center' onSubmit={this.onSubmit}>
+                <div className="form-group width-30">
+                    <input type='text' name='name' placeholder='Name' className='form-control'  onChange={this.onChange}/>
+                </div>
+                <div className="form-group width-30">
+                    <input type='text' name='username' placeholder='Username' className='form-control'  onChange={this.onChange}/>
+                </div>
+                <div className="form-group width-30">
+                    <input type='text' name='password' placeholder='Password' className='form-control'  onChange={this.onChange}/>
+                </div>
+                <div className="form-group width-30">
+                    <input type='text' name='confirmpassword' placeholder='Confirm Password' className='form-control'  onChange={this.onChange}/>
+                </div>
+                <div className="form-group width-30">
+                    <input type='text' name='email' placeholder='Email' className='form-control'  onChange={this.onChange}/>
+                </div>
+                <button className='btn btn-primary' type='submit'>Register</button>
+                {error && <p>{error.message}</p>}
+            </form>
+        </div>
         );
     }
 }

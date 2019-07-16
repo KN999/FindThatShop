@@ -66,6 +66,9 @@ export default class Login extends Component  {
         }
 
         return (<div>
+            <div className="jumbotron">
+                <h1>Login</h1>
+            </div>
             <form onSubmit={this.onSubmit}> 
             <div className="Login">
                 <div className="form-group align-webkit-center">
@@ -74,7 +77,7 @@ export default class Login extends Component  {
                 <div className="form-group align-webkit-center">
                     <input type="password" value={this.state.password} name="password" placeholder="Password" className="form-control width-25" onChange={this.onChange} />
                 </div>
-                <button disabled={isInvalid} type="submit" className="btn btn-warning" >Log in</button>
+                <button disabled={isInvalid} type="submit" className="btn btn-primary" >Log in</button>
             </div>
             {error && <p>{error.message}</p>}
             </form>
