@@ -1,6 +1,7 @@
 import React, {Component}  from 'react';
 import './Register.css'
 import axios from 'axios';
+import Navbar from './Navbar'
 
 const INITIAL_STATE = {
     username : '',
@@ -39,22 +40,21 @@ class Register extends Component {
             email: email
           })
           .then( (response) => {
-             if(JSON.stringify(response.data) == 'true') 
+              console.log(")))))))))))))))", JSON.stringify(response))
+             if(JSON.stringify(response.data) === 'false') 
              {  
-                 console.log("resp",response)
-                 
-                 this.setState({
-                     redirect : true
-                 },()=>console.log("()()()()",this.state.redirect))
-                //this.context.history.push('/')
+                alert('Username already taken')
                 alert(JSON.stringify(response.data))
              }
              else 
              {
-                alert('in else')
-                alert(JSON.stringify(response.data))
-                this.context.history.push('/login')
-                
+                console.log("resp",response)
+                localStorage.setItem('LoginToken', JSON.stringify(response.data))
+                this.setState({
+                    redirect : true
+                },()=>console.log("()()()()",this.state.redirect))
+               //this.context.history.push('/')
+               alert(JSON.stringify(response))
              }
           })
           .catch(function (error) {
@@ -68,7 +68,7 @@ class Register extends Component {
 
     render () 
     {
-        
+        console.log("##################",this.props)
         const {
             username,
             name,
@@ -77,10 +77,9 @@ class Register extends Component {
             email,
             error,
             } = this.state;
-        
-
+    
         const isInvalid =
-        passwordOne !== passwordTwo ||
+        passwordTwo === '' ||
         passwordOne === '' ||
         email === '' ||
         username === '' ||
@@ -90,32 +89,33 @@ class Register extends Component {
         console.log("****************",this.state.redirect)
         if (this.state.redirect == true)
         {
-            history.push("/")
+            history.push("/dashboard")
         }
         
 
         return (
             <div>
+                <Navbar />
                 <div className="jumbotron">
                     <h1>Register</h1>
                 </div>
                 <form className='align-webkit-center' onSubmit={this.onSubmit}>
                 <div className="form-group width-30">
-                    <input type='text' name='name' placeholder='Name' className='form-control'  onChange={this.onChange}/>
-                </div>
-                <div className="form-group width-30">
                     <input type='text' name='username' placeholder='Username' className='form-control'  onChange={this.onChange}/>
                 </div>
                 <div className="form-group width-30">
-                    <input type='text' name='password' placeholder='Password' className='form-control'  onChange={this.onChange}/>
+                    <input type='text' name='name' placeholder='Name' className='form-control'  onChange={this.onChange}/>
                 </div>
                 <div className="form-group width-30">
-                    <input type='text' name='confirmpassword' placeholder='Confirm Password' className='form-control'  onChange={this.onChange}/>
+                    <input type='password' name='password' placeholder='Password' className='form-control'  onChange={this.onChange}/>
                 </div>
                 <div className="form-group width-30">
-                    <input type='text' name='email' placeholder='Email' className='form-control'  onChange={this.onChange}/>
+                    <input type='password' name='confirmpassword' placeholder='Confirm Password' className='form-control'  onChange={this.onChange}/>
                 </div>
-                <button className='btn btn-primary' type='submit'>Register</button>
+                <div className="form-group width-30">
+                    <input type='email' name='email' placeholder='Email' className='form-control'  onChange={this.onChange}/>
+                </div>
+                <button disabled={isInvalid} className='btn btn-primary' type='submit'>Register</button>
                 {error && <p>{error.message}</p>}
             </form>
         </div>

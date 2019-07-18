@@ -1,15 +1,25 @@
 .width-65 {
-    width : 65%;
+  width : 65%;
 }
 
 .align-webkit-center {
-    text-align: -webkit-center;
+  text-align: -webkit-center;
 }
 
 .margin-5 {
-    margin : 5%;
-  }
+  margin : 5%;
+}
   
-  .font-400 {
-    font-size : 400%
-  }
+.font-400 {
+  font-size : 400%
+}
+
+.margin-16 {
+  margin-top: 16%;
+}
+.padding-top-1 {
+  padding-top: 1%;
+}
+.margin-bottom-0{
+  margin-bottom: 0;
+}

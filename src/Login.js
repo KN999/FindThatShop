@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import './Login.css'
 import axios from 'axios';
+import Navbar from './Navbar'
 
 export default class Login extends Component  {
     constructor(props) {
         super(props)
-
+        console.log("$$$$$$$$$$$$$",props)
         this.state = {
             username : '',
             password : '',
@@ -31,12 +32,23 @@ export default class Login extends Component  {
             password: password,
           })
           .then( (response) => {
-            if(JSON.stringify(response.data) == 'true') 
+            
+            if(JSON.stringify(response.data) === 'false') 
             {   
+                alert('in else')
+                alert(JSON.stringify(response.data))
+            }
+            else 
+             {
+                console.log("in if")
+                var Token =  JSON.stringify(response.data)
+                localStorage.setItem('LoginToken', Token)
                 this.setState({
                     redirect : true
                 })
-            }
+                console.log("Successfully Loggedin")
+                
+             }
          })
          .catch(function (error) {
            alert('error')
@@ -47,7 +59,7 @@ export default class Login extends Component  {
     }
 
     render () {
-
+        console.log("###################",this.props)
         const {
             username,
             password,
@@ -62,10 +74,14 @@ export default class Login extends Component  {
         const { history } = this.props
         if (this.state.redirect === true)
         {
-            history.push('/')
+            //console.log("%%%%%%%%%%%%%%%%%%%%%%",this.props.auth);
+            //this.props.auth(true);
+            
+            history.push('/dashboard')
         }
 
         return (<div>
+            <Navbar />
             <div className="jumbotron">
                 <h1>Login</h1>
             </div>

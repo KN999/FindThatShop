@@ -90,12 +90,17 @@ class Shop extends React.Component  {
         weight : '',
         items : [],
       };
-
+      
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
   }
   
   render() {
+    console.log("&&&&&&&&&&&&&&&&",this.props)
+    for(var i = 0; i < this.props.shops.length; i++)
+    {
+      this.props.shops[i].id = JSON.stringify(1);
+    }
     console.log("$$$$$$$$$$$$",this.state)
       return (
           <div>
