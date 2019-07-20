@@ -9,14 +9,14 @@ return (
     <div>
         <Navbar />    
         <div className="align-webkit-center margin-16">
-            <div className="input-group width-65">
-                <input type="text" name="thing" className="form-control" placeholder="Search e.g- Refine oil"/>
+            <h1>Hi</h1>
+            <h3>Check things if they are available near you</h3>
+            <div className="input-group width-65 ">
+                <input type="text" name="thing" className="form-control" placeholder="Enter a thing you wanna know about"/>
                 <span className="input-group-btn">
                     <button type="submit" className="btn btn-primary">search</button>
                 </span>
             </div>
-            <legend className="padding-top-1 margin-bottom-0">OR</legend>
-            <legend><a href="/Register">Register your Shop with us</a></legend>
         </div>
     </div>
   );

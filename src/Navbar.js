@@ -6,7 +6,7 @@ export default class Navbar extends React.Component {
         var NavbarLogin = (
         <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto mt-2">
-                <li className="nav-item"><a className="nav-link" href="/Register">Register</a></li>
+                <li className="nav-item"><a className="nav-link" href="/Register">Add Shop</a></li>
                 <li className="nav-item"><a className="nav-link" href="/Login">Login</a></li>
             </ul>
         </div>
