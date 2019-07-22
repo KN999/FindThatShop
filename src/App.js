@@ -7,6 +7,7 @@ import Account from './shop';
 import Dashboard from './Dashboard';
 import AddShop from './AddShop'
 import Logout from './Logout'
+import AddItem from './AddItem'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -43,6 +44,7 @@ export default class App extends Component {
             <Route path='/shop' component={Account} />
             <Route exact path='/Dashboard' component={Dashboard} />
             <Route exact path='/Dashboard/AddShop' component={AddShop} />
+            <Route exact path='/Dashboard/AddItem' component={AddItem} />
           </div> 
         </Router>
         
