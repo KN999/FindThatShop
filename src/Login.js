@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import './Login.css'
 import axios from 'axios';
 import Navbar from './Navbar'
+import { login } from './service-layer/users'
 
 export default class Login extends Component  {
     constructor(props) {
         super(props)
-        console.log("$$$$$$$$$$$$$",props)
+
         this.state = {
             username : '',
             password : '',
@@ -23,43 +24,26 @@ export default class Login extends Component  {
     }
 
     onSubmit = (event) => {
-        //alert(`username is ${this.state.username} and password is ${this.state.password}`)
-        event.preventDefault()
-        const { username, password } = this.state;
+        event.preventDefault();
 
-        axios.post('/index/login', {
-            username: username,
-            password: password,
-          })
-          .then( (response) => {
-            
-            if(JSON.stringify(response.data) === 'false') 
-            {   
-                alert('in else')
-                alert(JSON.stringify(response.data))
-            }
-            else 
-             {
-                console.log("in if")
-                var Token =  JSON.stringify(response.data)
-                localStorage.setItem('LoginToken', Token)
+        const { username, password } = this.state;
+        var user = {
+            username : username,
+            password : password
+        }
+
+        login(user, (redirect) => {
+            if(redirect === 0) {
                 this.setState({
                     redirect : true
-                })
-                console.log("Successfully Loggedin")
-                
-             }
-         })
-         .catch(function (error) {
-           alert('error')
-           console.log(error);
-         });
-        
-          
+                });
+            }
+        })
+
     }
 
     render () {
-        console.log("###################",this.props)
+
         const {
             username,
             password,
@@ -73,10 +57,7 @@ export default class Login extends Component  {
 
         const { history } = this.props
         if (this.state.redirect === true)
-        {
-            //console.log("%%%%%%%%%%%%%%%%%%%%%%",this.props.auth);
-            //this.props.auth(true);
-            
+        {   
             history.push('/dashboard')
         }
 

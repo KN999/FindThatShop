@@ -32,8 +32,7 @@ export default class Navbar extends React.Component {
             var Navbar = NavbarLogin
         }
         
-        console.log("(((((((((((((((((((()))))))))))",JSON.stringify(loginToken))
-        console.log("_______________________", JSON.stringify(loginToken))
+        
             return (
                 
                 <div className="Navbar">    
