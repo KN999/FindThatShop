@@ -3,62 +3,78 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-/*
-import { createStore } from 'redux;'
 import { Provider } from 'react-redux'
+import  store  from './store'
 
-// Reducer
+ReactDOM.render(
+    <Provider store = {store}>
+    <App />
+    </Provider>,
+     document.getElementById('root')
+);
+
+serviceWorker.unregister();
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+
+//import IsAuth from './reducer/IsAuth';
+/*
+//reducer
 const IsAuth = (user = {
     auth: false,
     token : ''
 }, action) => {
     switch(action.type) {
         case "login" :
-            user.token = action.token;
-            user.auth = true;
+            user = {
+                ...user,
+                token : action.token,
+                auth : true,
+            }
             break;
         case "logout" :
-            user.token = action.token;
-            user.auth = false;
+                user = {
+                    ...user,
+                    token : action.token,
+                    auth : false,
+                }
             break;
     }
 
     return user;
 }
 
-// Creating Store
-const store = createStore(IsAuth, {});
+//action
+const login = () => {
+    return {
+       type: 'login',
+        token: 'username'
+    }
+}
 
-// Logging Console when store get updated
-store.subscribe(()=>{
-    console.log("Store updated!", store.getState());
-})
+const logout = () => {
+    return {
+       type: 'logout',
+        token: ''
+    }
+}
 
-// Calling the Reducer to change the state with action
-store.dispatch({
-    type: "login",
-    payload: 'username'
-})
-store.dispatch({
-    type: "logout",
-    payload: ''
-})
+//store
+const store = createStore(
+    IsAuth,
+    {},
+    applyMiddleware(logger)
+);
 
-ReactDOM.render(
-<Provider store={store}>
-<App />
-</Provider>,
- document.getElementById('root')
- );
+//subscribe
+
+store.subscribe( ()=> {console.log(store.getState())})
+
+//dispatch
+store.dispatch(login())
+
+store.dispatch(logout())
 
 */
-
-ReactDOM.render(<App />,
- document.getElementById('root')
- );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
-

@@ -6,7 +6,7 @@ export default class Logout extends React.Component {
     }
 
     render(){
-        localStorage.setItem('LoginToken', "");
+        
         var { history } = this.props;
         history.push('/')
 

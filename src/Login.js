@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import './Login.css'
-import axios from 'axios';
 import Navbar from './Navbar'
 import { login } from './service-layer/users'
+import { connect } from 'react-redux';
+import { loginaction } from './action/log'
 
-export default class Login extends Component  {
+
+class Login extends Component  {
     constructor(props) {
         super(props)
 
@@ -26,14 +28,16 @@ export default class Login extends Component  {
     onSubmit = (event) => {
         event.preventDefault();
 
-        const { username, password } = this.state;
         var user = {
-            username : username,
-            password : password
+            username : this.state.username,
+            password : this.state.password
         }
 
+        // axios call
         login(user, (redirect) => {
             if(redirect === 0) {
+                this.props.loginCall(user.username)
+                console.log("######",this.props.user)
                 this.setState({
                     redirect : true
                 });
@@ -43,7 +47,7 @@ export default class Login extends Component  {
     }
 
     render () {
-
+        
         const {
             username,
             password,
@@ -83,3 +87,18 @@ export default class Login extends Component  {
     }
 
 }
+
+const mapStateToProps = state => {
+    return {
+      user: state
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loginCall: username => dispatch(loginaction(username))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

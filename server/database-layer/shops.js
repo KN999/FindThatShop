@@ -55,15 +55,21 @@ exports.GetShops = (username, callback) => {
     mongodb.connect(url, function (err, client) {
 
         assert.equal(null, err);
-        console.log("^^^^^^^^^^^^",username)
         var db = client.db('shopkeeper');
-        var result = {};
+        var result = {
+            code : 405, // No shops added
+            message : "No shop found",
+        };
 
         // Find the userShop delete it and add it to 
         db.collection('shop').find({ username: username }).forEach(function (dbshop) {
             if (dbshop) {
-              callback(dbshop)
+                result.code = 404; // Success in retrieving data
+                result.message = "Data found";
+                result.shop = dbshop;
             }
+        },() => {
+                callback(result);
         })
     });
 }

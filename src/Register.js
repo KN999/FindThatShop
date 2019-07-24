@@ -27,16 +27,15 @@ class Register extends Component {
 
     onSubmit = (event) => {
         event.preventDefault()
-        
-        const { username, name, password, confirmpassword, email } = this.state;
+
         var user = {
-            username : username,
-            name : name,
-            password : password,
-            email : email,
+            username : this.state.username,
+            name : this.state.name,
+            password : this.state.password,
+            email : this.state.email,
         }
 
-        if (password === confirmpassword) {
+        if (this.state.password === this.state.confirmpassword) {
             register(user, (redirect) => {
                 if(redirect === 0) {
                     this.setState({

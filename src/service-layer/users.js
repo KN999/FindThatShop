@@ -12,12 +12,11 @@ export function register(user, callback) {
         if(response.data.code === 303) 
         {  
             //localStorage.setItem('LoginToken', JSON.stringify(response.data))
-            alert('Success')
             callback(0)
         }
         else 
         {
-            alert(response.data.message);
+            console.log("ERROR",response.data.message);
         }
       })
       .catch(function (error) {
@@ -36,12 +35,11 @@ export function login(user, callback) {
         if(response.data.code === 102) 
         {  
             //localStorage.setItem('LoginToken', JSON.stringify(response.data))
-            alert('Success')
             callback(0)
         }
         else 
         {
-            alert(response.data.message);
+            console.log("ERROR",response.data.message);
         }
       })
       .catch(function (error) {

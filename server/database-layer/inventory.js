@@ -40,10 +40,10 @@ exports.AddItem = (itemDetails, callback) => {
                 
             }
         }, () => {
-            // Add shop
+            // Add item
             db.collection('item').insertOne(shopItem, function (err, res) {
 
-                result.code = 503;// 403 - shop registered successfully
+                result.code = 503;// 503 - item added successfully
                 result.message = 'Success';
                 console.log("item inserted");
 

@@ -1,5 +1,8 @@
 import React,{Component} from 'react';
 import './Navbar.css';
+//import { connect } from 'react-redux';
+//import { log } from './action/log'
+
 
 export default class Navbar extends React.Component {
     render(){
@@ -23,8 +26,8 @@ export default class Navbar extends React.Component {
             </ul>
         </div>
         )
-        var loginToken = localStorage.getItem('LoginToken')
-        if (loginToken === "")
+
+        if (this.props === true)
         {
             var Navbar = NavbarWithoutLogin;
         }
@@ -46,3 +49,21 @@ export default class Navbar extends React.Component {
             );
     }
 }
+/*
+const mapStateToProps = (state) => {
+    return {
+      user: state.IsAuth
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        log: (auth) => {
+            dispatch(log(auth));
+        }
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+*/
