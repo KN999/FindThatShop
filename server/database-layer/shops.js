@@ -9,14 +9,16 @@ exports.AddShop = (shopDetails, callback) => {
 
     mongodb.connect(url, function (err, client) {
         assert.equal(null, err);
-        console.log(shopDetails)
+        console.log("fdskjjsfjlj",shopDetails)
         var shop =  {
+            shopid : shopDetails.shopid,
             shopName : shopDetails.shopName,
             shopOwner: shopDetails.shopOwner,
             shopAddress: shopDetails.shopAddress,
             shopContactNo: shopDetails.shopContactNo,
             image : '',
         }
+        
         var userShop = {
             username : shopDetails.username,
             shops : []

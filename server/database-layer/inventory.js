@@ -12,6 +12,7 @@ exports.AddItem = (itemDetails, callback) => {
         assert.equal(null, err);
         console.log(itemDetails)
         var item =  {
+            itemid: itemDetails.itemid,
             itemName : itemDetails.itemName,
             itemPrice: itemDetails.itemPrice,
             itemQuantity: itemDetails.itemQuantity,
@@ -62,7 +63,10 @@ exports.GetItems = (shopid, callback) => {
         console.log("^^^^^^^^^^^^",shopid)
         var db = client.db('shopkeeper');
 
-        var result = {};
+        var result = {
+            code : 501, // Wrong Shopid
+            message : "Failure",
+        };
 
         // Find the userShop delete it and add it to 
         db.collection('item').find({ shopid: shopid }).forEach(function (dbitem) {
@@ -70,15 +74,11 @@ exports.GetItems = (shopid, callback) => {
 
                 result.code = 500; // Item Found
                 result.message = "Success"
-              callback(dbitem)
+              result.item = dbitem
             }
     
-        }, () => {
-            if (result.code !== 500) {
-                result.code =501; // Wrong Shopid
-                result.message = "Failure"
+        }, () => {    
                 callback(result)
-            }
-        })
+            })
     });
 }

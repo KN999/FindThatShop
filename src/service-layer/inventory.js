@@ -1,15 +1,16 @@
 import axios from 'axios';
 
 export function additem(item, callback) {
-    axios.post('/item/additem', {
-        shopname: item.shopname,
+    axios.post('/inventory/additem', {
+        shopid: item.shopid,
         itemname : item.itemname,
         quantity : item.quantity,
         price : item.price,
+        mass : item.mass,
         image : '',
       })
       .then( (response) => {
-           
+           console.log("sdffad",response)
         if(response.data.code === 503) 
         {  
             //localStorage.setItem('LoginToken', JSON.stringify(response.data))
@@ -27,9 +28,9 @@ export function additem(item, callback) {
 }
 
 // getitem
-export function getitem(shopname, callback) {
-    axios.get('/item/getitem', { params :{
-      shopname: shopname,
+export function getitem(shopid, callback) {
+    axios.get('/inventory/getitem', { params :{
+      shopid: shopid,
       }})
       .then( (response) => {
         

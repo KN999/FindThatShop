@@ -24,6 +24,7 @@ export default class App extends Component {
     return (
         <Router>
           <div className="App">
+            <Navbar />
             <Route exact path='/Logout' component={Logout} /> 
             <Route exact path='/' component={Homepage} />
             <Route path='/Register' component={Register} />

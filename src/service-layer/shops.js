@@ -35,6 +35,7 @@ export function getshop(username, callback) {
         
         if(response.data.code === 404) 
         {  
+            console.log('got the response', response)
             callback(response)
         }
         else 

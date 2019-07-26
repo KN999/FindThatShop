@@ -1,6 +1,5 @@
 import React, {Component}  from 'react';
 import './Register.css'
-import Navbar from './Navbar'
 import { register } from './service-layer/users'
 
 class Register extends Component {
@@ -59,7 +58,6 @@ class Register extends Component {
         
         return (
             <div>
-                <Navbar />
                 <div className="jumbotron">
                     <h1>Register</h1>
                 </div>

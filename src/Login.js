@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './Login.css'
-import Navbar from './Navbar'
 import { login } from './service-layer/users'
 import { connect } from 'react-redux';
 import { loginaction } from './action/log'
@@ -37,7 +36,6 @@ class Login extends Component  {
         login(user, (redirect) => {
             if(redirect === 0) {
                 this.props.loginCall(user.username)
-                console.log("######",this.props.user)
                 this.setState({
                     redirect : true
                 });
@@ -66,7 +64,6 @@ class Login extends Component  {
         }
 
         return (<div>
-            <Navbar />
             <div className="jumbotron">
                 <h1>Login</h1>
             </div>

@@ -1,6 +1,5 @@
 // Need to remove state username and add state image
 import React, {Component} from 'react'
-import Navbar2 from './Navbar2'
 import { addshop } from './service-layer/shops'
 
 export default class AddShop extends React.Component {
@@ -51,7 +50,6 @@ export default class AddShop extends React.Component {
         
         return (
             <div>
-                <Navbar2 />
                 <form className='align-webkit-center' onSubmit={this.onSubmit}>
                 <div className="form-group width-30">
                     <input type='text' name='username' placeholder='username' className='form-control'  onChange={this.onChange}/>
