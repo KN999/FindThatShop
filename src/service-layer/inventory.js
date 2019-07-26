@@ -29,12 +29,12 @@ export function additem(item, callback) {
 
 // getitem
 export function getitem(shopid, callback) {
-    axios.get('/inventory/getitem', { params :{
+    axios.get('/inventory/getitems', { params :{
       shopid: shopid,
       }})
       .then( (response) => {
         
-        if(response.data.code === 404) 
+        if(response.data.code === 500) 
         {  
             callback(response)
         }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { additem } from './service-layer/inventory'
 import { getshop } from './service-layer/shops'
+import './AddItem.css'
 
 export default class AddItem extends React.Component {
     constructor (props) {
@@ -56,7 +57,7 @@ export default class AddItem extends React.Component {
         }
     
         return (
-            <div>
+            <div className="margin-top-50px">
                 <form className='align-webkit-center' onSubmit={this.onSubmit}>
                 <div className="form-group width-30">
                    <select className="browser-default custom-select" value={this.state.shopid} onChange={this.onChange} name="shopid">  

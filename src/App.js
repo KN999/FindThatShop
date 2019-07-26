@@ -8,6 +8,7 @@ import Dashboard from './Dashboard';
 import AddShop from './AddShop'
 import Logout from './Logout'
 import AddItem from './AddItem'
+import GetShop from './GetShop'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -25,6 +26,7 @@ export default class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
+            <Route exact path='/getshop' component={GetShop} /> 
             <Route exact path='/Logout' component={Logout} /> 
             <Route exact path='/' component={Homepage} />
             <Route path='/Register' component={Register} />

@@ -28,8 +28,8 @@ class Dashboard extends Component {
         console.log(this.props.user)
         console.log(this.state.shops)
         return(
-            <div>
-                <h1>Dashboard</h1>
+            <div className="margin-100px">
+                <h1>Shops</h1>
                 {this.state.shops.map(shop=>(
                     <div className="row align-items-center border border-style-inset margin-2 width-auto">
                         <div className="col-md-3 col-xs-3 text-left width-auto">
