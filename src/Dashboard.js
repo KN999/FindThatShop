@@ -1,77 +1,57 @@
-//Rendering details
-//merging details and gettting data from the merged table
-    //Right now you are getting only table details but you also need table items
-
 import React, { Component } from 'react';
-import axios from 'axios';
-import Navbar from './Navbar2'
+import { getshop } from './service-layer/shops'
+import { connect } from 'react-redux';
+import shop from './shop.jpg'
+import './Dashboard.css'
 
-var users = [];
-
-export default class Dashboard extends Component {
+class Dashboard extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
-            users : [],
-            unmounted : false
+            shops : [],
         }
     }
     
     componentDidMount() {
-        axios.get('/shop/dashboard', {
-            params: {
-                user_id : localStorage.getItem('LoginToken')
-            }
-        }).then(res => {
-            if (this.unmounted) return;
-            var shops = res.data;
-            var usersShop = []
-
-            
-            for(var i = 0;i < shops.length; i ++) {
-                
-                users.push(shops[i])                
-                usersShop.push(shops[i]);
-            }
-            this.Alert(usersShop)
-            console.log(usersShop)
-            
-                //take the table data in loop and pass it to the function that renders it.
-                
-            })
-    }
-    componentWillUnmount(){
-        this.unmounted = true;
-    }
-
-    Alert (data) {
-        this.setState({
-            users: [
-                data
-            ]
+        var self = this
+        getshop('p', (response) => {
+            self.setState({shops: response.data.shop.shops})
         })
-        console.log("^^&^^&^&^&^&^&^&^&^&^", users)
-        console.log("~~~~~~~~~~~~~~~~~~~~~",JSON.stringify(this.users))
-        
+
     }
-    
+
     render() {
+
+        var image = <img src={shop} alt="Shop image" className="width-100 margin-10"/>
+
+        console.log(this.props.user)
+        console.log(this.state.shops)
         return(
             <div>
-                <Navbar />
                 <h1>Dashboard</h1>
-                
-                   {users.map(detail=>(
-                       <ul>
-                       <li>{detail.shopname}</li>
-                       <li>{detail.shopowner}</li>
-                       <li>{detail.shopaddress}</li>
-                       <li>{detail.shopcontactno}</li>
-                       </ul>
-                    ))}
+                {this.state.shops.map(shop=>(
+                    <div className="row align-items-center border border-style-inset margin-2 width-auto">
+                        <div className="col-md-3 col-xs-3 text-left width-auto">
+                            {image}
+                        </div>
+                        <div  className="col-md-8 col-xs-8 text-left width-auto">
+                            Shop :{shop.shopName} <br />
+                            Owner : {shop.shopOwner} <br />
+                            Address : {shop.shopAddress} <br />
+                            Contact Number : {shop.shopContactNo} <br />
+                        </div>
+                    </div>
+                ))}                    
             </div>
         );
     }
 }
 
+const mapStateToProps = state => {
+    return {
+      user: state
+    }
+};
+
+export default connect(mapStateToProps)(Dashboard);

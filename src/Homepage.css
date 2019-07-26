@@ -20,6 +20,14 @@
 .padding-top-1 {
   padding-top: 1%;
 }
-.margin-bottom-0{
+.margin-bottom-0 {
   margin-bottom: 0;
+}
+
+.font-size-3-5 {
+  font-size: 3.5rem;
+}
+
+.font-color-white {
+  color: white;
 }

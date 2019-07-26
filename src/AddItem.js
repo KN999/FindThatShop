@@ -1,63 +1,71 @@
 import React, {Component} from 'react'
-import axios from 'axios';
-import Navbar from './Navbar2'
-
-var shopnames = [];
+import { additem } from './service-layer/inventory'
+import { getshop } from './service-layer/shops'
 
 export default class AddItem extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+            shopid: '',
             itemname : '',
             quantity : '',
             price : '',
-            unmounted : false,
+            mass : '',
+            shops : []
         }
     }
+
     componentDidMount() {
-        axios.get('/shop/dashboard', {
-            params: {
-                user_id : localStorage.getItem('LoginToken')
-            }
-        }).then(res => {
-            if (this.unmounted) return;
-            var shops = res.data;
-            var usersShop = []
-            console.log("shops = ",JSON.stringify(shops))
-            console.log("shops.length = ",shops.length)
-            for(var i = 0;i < shops.length; i ++) {
-                shopnames.push(shops[i]);
-                
-                console.log("shop[i]",)
-            }
-            
-                //take the table data in loop and pass it to the function that renders it.
-                
+        var self = this
+        getshop('c', (response) => {
+            self.setState({shops: response.data.shop.shops})
         })
+
     }
-    componentWillUnmount(){
-        this.unmounted = true;
-    }
+
+    onSubmit = (event) => {
+        event.preventDefault()
+        var item = {
+            shopid: this.state.shopid,
+            itemname: this.state.itemname,
+            quantity: this.state.quantity,
+            price: this.state.price,
+            mass : this.state.mass,
+        }
+        
+        additem(item, (redirect) => {
+            if(redirect === 0) {
+                this.setState({
+                    redirect : true
+                });
+            }
+        })
+    };
     onChange = (event) => {
         this.setState({
             [event.target.name] : event.target.value,
         });
     }
 
-   
-
     render() {
+
         const { history } = this.props;
         if (this.state.redirect == true)
         {
             history.push("/dashboard")
         }
-        console.log("#$#$$#$$$$$##$###$#"+JSON.stringify(shopnames))
+    
         return (
             <div>
-                <Navbar />
                 <form className='align-webkit-center' onSubmit={this.onSubmit}>
-                
+                <div className="form-group width-30">
+                   <select className="browser-default custom-select" value={this.state.shopid} onChange={this.onChange} name="shopid">  
+                        <option disabled selected >Shop Name</option>
+                       {this.state.shops.map(shop=>(
+                           <option value={shop.shopid}>{shop.shopName}</option>
+                       ))}
+                    </select>
+                </div>
                 <div className="form-group width-30">
                     <input type='text' name='itemname' placeholder='Item Name' className='form-control'  onChange={this.onChange}/>
                 </div>
@@ -67,16 +75,13 @@ export default class AddItem extends React.Component {
                 <div className="form-group width-30">
                     <input type='tel' name='price' placeholder='Price' className='form-control'  onChange={this.onChange}/>
                 </div>
-                <button className='btn btn-primary' type='submit'>Add Shop</button>
+                <div className="form-group width-30">
+                    <input type='tel' name='mass' placeholder='Mass' className='form-control'  onChange={this.onChange}/>
+                </div>
+                <button className='btn btn-primary' type='submit'>Add Item</button>
                 
             </form>
-            <ul>
-                        {shopnames.map(shop=>(
-                            <li>{shop.name}</li>
-                        ))}
-                    </ul>
         </div>
         );
     }
 }
-

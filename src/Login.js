@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import './Login.css'
-import axios from 'axios';
-import Navbar from './Navbar'
+import { login } from './service-layer/users'
+import { connect } from 'react-redux';
+import { loginaction } from './action/log'
 
-export default class Login extends Component  {
+
+class Login extends Component  {
     constructor(props) {
         super(props)
-        console.log("$$$$$$$$$$$$$",props)
+
         this.state = {
             username : '',
             password : '',
@@ -23,43 +25,27 @@ export default class Login extends Component  {
     }
 
     onSubmit = (event) => {
-        //alert(`username is ${this.state.username} and password is ${this.state.password}`)
-        event.preventDefault()
-        const { username, password } = this.state;
+        event.preventDefault();
 
-        axios.post('/index/login', {
-            username: username,
-            password: password,
-          })
-          .then( (response) => {
-            
-            if(JSON.stringify(response.data) === 'false') 
-            {   
-                alert('in else')
-                alert(JSON.stringify(response.data))
-            }
-            else 
-             {
-                console.log("in if")
-                var Token =  JSON.stringify(response.data)
-                localStorage.setItem('LoginToken', Token)
+        var user = {
+            username : this.state.username,
+            password : this.state.password
+        }
+
+        // axios call
+        login(user, (redirect) => {
+            if(redirect === 0) {
+                this.props.loginCall(user.username)
                 this.setState({
                     redirect : true
-                })
-                console.log("Successfully Loggedin")
-                
-             }
-         })
-         .catch(function (error) {
-           alert('error')
-           console.log(error);
-         });
-        
-          
+                });
+            }
+        })
+
     }
 
     render () {
-        console.log("###################",this.props)
+        
         const {
             username,
             password,
@@ -73,15 +59,11 @@ export default class Login extends Component  {
 
         const { history } = this.props
         if (this.state.redirect === true)
-        {
-            //console.log("%%%%%%%%%%%%%%%%%%%%%%",this.props.auth);
-            //this.props.auth(true);
-            
+        {   
             history.push('/dashboard')
         }
 
         return (<div>
-            <Navbar />
             <div className="jumbotron">
                 <h1>Login</h1>
             </div>
@@ -102,3 +84,18 @@ export default class Login extends Component  {
     }
 
 }
+
+const mapStateToProps = state => {
+    return {
+      user: state
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loginCall: username => dispatch(loginaction(username))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,24 +1,21 @@
 import React, {Component}  from 'react';
 import './Register.css'
-import axios from 'axios';
-import Navbar from './Navbar'
-
-const INITIAL_STATE = {
-    username : '',
-    name : '',
-    password : '',
-    confirmpassword : '',
-    email : '',
-    error : null,
-    redirect : false,
-};
+import { register } from './service-layer/users'
 
 class Register extends Component {
 
     constructor (props) {
         super(props)
-        console.log(this.state)
-        this.state = {INITIAL_STATE}
+        
+        this.state = {
+            username : '',
+            name : '',
+            password : '',
+            confirmpassword : '',
+            email : '',
+            error : null,
+            redirect : false,
+        }
     }
 
     onChange = (event) => {
@@ -29,73 +26,38 @@ class Register extends Component {
 
     onSubmit = (event) => {
         event.preventDefault()
-        console.log("^^^^^^^^^^^^^^^^",this.state)
-        const { username, name, password, confirmpassword, email } = this.state;
-        
-        axios.post('/index/register', {
-            username: username,
-            name : name,
-            password: password,
-            confirmpassword : confirmpassword,
-            email: email
-          })
-          .then( (response) => {
-              console.log(")))))))))))))))", JSON.stringify(response))
-             if(JSON.stringify(response.data) === 'false') 
-             {  
-                alert('Username already taken')
-                alert(JSON.stringify(response.data))
-             }
-             else 
-             {
-                console.log("resp",response)
-                localStorage.setItem('LoginToken', JSON.stringify(response.data))
-                this.setState({
-                    redirect : true
-                },()=>console.log("()()()()",this.state.redirect))
-               //this.context.history.push('/')
-               alert(JSON.stringify(response))
-             }
-          })
-          .catch(function (error) {
-            alert('error')
-            console.log(error);
-          });
-    };
-            
-    
 
+        var user = {
+            username : this.state.username,
+            name : this.state.name,
+            password : this.state.password,
+            email : this.state.email,
+        }
+
+        if (this.state.password === this.state.confirmpassword) {
+            register(user, (redirect) => {
+                if(redirect === 0) {
+                    this.setState({
+                        redirect : true
+                    });
+                }
+            })
+        }
+        else {
+            alert("password & confirmpassword are not same");
+        }
+
+    };
 
     render () 
     {
-        console.log("##################",this.props)
-        const {
-            username,
-            name,
-            passwordOne,
-            passwordTwo,
-            email,
-            error,
-            } = this.state;
-    
-        const isInvalid =
-        passwordTwo === '' ||
-        passwordOne === '' ||
-        email === '' ||
-        username === '' ||
-        name === '';
-        
         const { history } = this.props;
-        console.log("****************",this.state.redirect)
-        if (this.state.redirect == true)
-        {
-            history.push("/dashboard")
-        }
         
-
+        if (this.state.redirect == true)
+            history.push("/dashboard")
+        
         return (
             <div>
-                <Navbar />
                 <div className="jumbotron">
                     <h1>Register</h1>
                 </div>
@@ -115,16 +77,12 @@ class Register extends Component {
                 <div className="form-group width-30">
                     <input type='email' name='email' placeholder='Email' className='form-control'  onChange={this.onChange}/>
                 </div>
-                <button disabled={isInvalid} className='btn btn-primary' type='submit'>Register</button>
-                {error && <p>{error.message}</p>}
+                <button className='btn btn-primary' type='submit'>Register</button>
+                
             </form>
         </div>
         );
     }
 }
-
-
-
-
 
 export default Register;

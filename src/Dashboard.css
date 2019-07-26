@@ -1,0 +1,27 @@
+.width-100 {
+    width : 50%;
+}
+
+.margin-10 {
+    margin : 10%;
+}
+
+.text-left {
+    text-align: left!important;
+}
+
+.border {
+    border: rgb(158, 202, 158);
+}
+
+.border-style-inset {
+    border-style: inset;
+}
+    
+.margin-2 {
+    margin: 2%;
+}
+    
+.width-auto {
+    width: auto;
+}

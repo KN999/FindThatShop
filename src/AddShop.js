@@ -1,12 +1,13 @@
+// Need to remove state username and add state image
 import React, {Component} from 'react'
-import axios from 'axios';
-import Navbar from './Navbar2'
+import { addshop } from './service-layer/shops'
 
 export default class AddShop extends React.Component {
     constructor (props) {
         super(props)
         console.log(this.state)
         this.state = {
+            username : '', 
             shopname : '',
             shopowner : '',
             shopaddress : '',
@@ -23,54 +24,36 @@ export default class AddShop extends React.Component {
 
     onSubmit = (event) => {
         event.preventDefault()
-        console.log("^^^^^^^^^^^^^^^^",this.state)
-        const { 
-        shopname,
-        shopowner,
-        shopaddress,
-        shopcontactno  } = this.state;
-        var Token = localStorage.getItem('LoginToken')
-        alert(Token)
-
-        axios.post('/shop/addshop', {
-            user_id : Token,
-            shopname : shopname,
-            shopowner : shopowner,
-            shopaddress : shopaddress,
-            shopcontactno : shopcontactno,
-          })
-          .then( (response) => {
-             if(JSON.stringify(response.data) === 'true') 
-             {  
-                 console.log("resp",response)
-                 this.setState({
-                     redirect : true
-                 })
-                 alert("99999999999 in if ",JSON.stringify(response.data))
-             }
-             else 
-             {
-                alert("99999999999 in else",JSON.stringify(response.data))
-                console.log("sorry shop was not added")  
-             }
-          })
-          .catch(function (error) {
-            alert('error')
-            console.log(error);
-          });
+        var shop = {
+            username : this.state.username,
+            shopname: this.state.shopname,
+            shopowner: this.state.shopowner,
+            shopaddress: this.state.shopaddress,
+            shopcontactno: this.state.shopcontactno,
+        }
+        
+        addshop(shop, (redirect) => {
+            if(redirect === 0) {
+                this.setState({
+                    redirect : true
+                });
+            }
+        })
     };
 
     render() {
+
         const { history } = this.props;
+
         if (this.state.redirect == true)
-        {
             history.push("/dashboard")
-        }
         
         return (
             <div>
-                <Navbar />
                 <form className='align-webkit-center' onSubmit={this.onSubmit}>
+                <div className="form-group width-30">
+                    <input type='text' name='username' placeholder='username' className='form-control'  onChange={this.onChange}/>
+                </div>
                 <div className="form-group width-30">
                     <input type='text' name='shopname' placeholder='Shop Name' className='form-control'  onChange={this.onChange}/>
                 </div>

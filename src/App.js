@@ -13,30 +13,18 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
+//import { connect } from 'react-redux';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isAuthenticate : 'false',
-      history : this.props.history,
-    };
-
-    this.authenticate = this.authenticate.bind(this);
-  }
-
-  authenticate(value){
-    this.setState({isAuthenticate : value}, ()=>{
-      console.log('authenticated');
-    })
   }
 
   render(){
     return (
         <Router>
           <div className="App">
-            
+            <Navbar />
             <Route exact path='/Logout' component={Logout} /> 
             <Route exact path='/' component={Homepage} />
             <Route path='/Register' component={Register} />
@@ -51,3 +39,35 @@ export default class App extends Component {
     );
   }
 }
+
+
+
+
+
+/*
+const mapStateToProps = (state) => {
+  return {
+    user: state.IsAuth
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    log: (auth) => {
+      dispatch({
+        type: auth.type,
+        token: auth.token,
+      })
+    }
+  }
+};
+
+const navbar = (props)=> {
+  return (
+    <Navbar IsAuth = {this.props.IsAuth}/>
+  );
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+*/
