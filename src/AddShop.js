@@ -1,6 +1,7 @@
 // Need to remove state username and add state image
 import React, {Component} from 'react'
 import { addshop } from './service-layer/shops'
+import './AddShop.css'
 
 export default class AddShop extends React.Component {
     constructor (props) {
@@ -49,7 +50,7 @@ export default class AddShop extends React.Component {
             history.push("/dashboard")
         
         return (
-            <div>
+            <div className="margin-top-50px">
                 <form className='align-webkit-center' onSubmit={this.onSubmit}>
                 <div className="form-group width-30">
                     <input type='text' name='username' placeholder='username' className='form-control'  onChange={this.onChange}/>
