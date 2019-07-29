@@ -7,9 +7,10 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import Button from '@material-ui/core/Button';
 import Shop from './shop.jpg'
 import add from './addSign.png'
-import Button from '@material-ui/core/Button';
+import AddShop from './AddShop'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -83,11 +84,11 @@ function ComplexGrid(props) {
                     </Grid>
                 </Paper>
             ))}
-            
+                <AddShop />
                 <Paper className={classes.paper2}>
                     <Grid container spacing={1} >
                         <Grid item>
-                            <ButtonBase className={classes.image}>
+                            <ButtonBase className={classes.image} >
                                 <img className={classes.img} alt="complex" src={add} />
                             </ButtonBase>
                         </Grid>
