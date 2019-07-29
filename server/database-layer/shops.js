@@ -35,7 +35,7 @@ exports.AddShop = (shopDetails, callback) => {
                     userShop.shops.push(element)
                 })
                 
-                db.collection('shop').remove({ username: shopDetails.username, _id: dbshop._id })
+                db.collection('shop').deleteOne({ username: shopDetails.username, _id: dbshop._id })
                 
             }
         }, () => {

@@ -1,9 +1,91 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import shop from './shop.jpg'
 import { getshop } from './service-layer/shops'
 import { getitem } from './service-layer/inventory'
 import './GetShop.css'
-import shop from './shop.jpg'
+import add from './addSign.png'
 
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    margin: 'auto',
+    maxWidth: 500,
+  },
+  paper2: {
+    padding: theme.spacing(2),
+    margin: 'auto',
+    maxWidth: 160
+  },
+  image: {
+    width: 128,
+    height: 128,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+}));
+
+function ComplexGrid(props) {
+
+    const classes = useStyles();
+
+    return (
+        <div className="makeStyles-root-1 row">
+            {props.items.map(Item=>(
+                <Paper className={classes.paper}>
+                <Grid container spacing={2}>
+                <Grid item>
+                    <ButtonBase className={classes.image}>
+                    <img className={classes.img} alt="complex" src={shop} />
+                    </ButtonBase>
+                </Grid>
+                <Grid item xs={12} sm container className="text-align-left">
+                    <Grid item xs container direction="column" spacing={2}>
+                    <Grid item xs>
+                        <Typography gutterBottom variant="subtitle1">
+                            <legend> {Item.itemName}</legend>
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle1">
+                            Mass : {Item.itemMass}
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle1">
+                            Quantity : {Item.itemQuantity}
+                        </Typography>
+                        
+                    </Grid>
+                    </Grid>
+                    <Grid item>
+                    <Typography variant="subtitle1">₹{Item.itemPrice}</Typography>
+                    </Grid>
+                </Grid>
+                </Grid>
+            </Paper>
+            ))} 
+            <Paper className={classes.paper2}>
+                <Grid container spacing={1} >
+                    <Grid item>
+                        <ButtonBase className={classes.image}>
+                            <img className={classes.img} alt="complex" src={add} />
+                        </ButtonBase>
+                    </Grid>
+                </Grid>
+            </Paper>
+        </div>
+    );
+}
+  
 export default class GetShop extends React.Component {
     constructor (props) {
         super(props);
@@ -16,16 +98,9 @@ export default class GetShop extends React.Component {
 
     componentDidMount() {
         var self = this
-        getshop('c', (response) => {
-            self.setState({shops: response.data.shop.shops})
-        })
-    }
 
-    onSubmit = (event) => {
-        event.preventDefault();
-        var self = this
-        console.log(this.state.shopid)
-        getitem(this.state.shopid, (response) => {
+        getitem(this.props.location.state.shopid, (response) => {
+            
             self.setState({items: response.data.item.items})
         })
     }
@@ -38,37 +113,11 @@ export default class GetShop extends React.Component {
     }
 
     render() {
-
+        console.log("^^^^^^^^^^^^",this.props.location.state.shopid)
         console.log("$$$$$$$$$$$$$$$",this.state.items)
         return(
             <div className="margin-top-50px">
-                <form className='align-webkit-center' onSubmit={this.onSubmit}>
-                    <div className="form-group width-30">
-                    <select className="browser-default custom-select" value={this.state.shopid} onChange={this.onChange} name="shopid">  
-                            <option selected disabled>Shop Name</option>
-                        {this.state.shops.map(shop=>(
-                            <option value={shop.shopid}>{shop.shopName}</option>
-                        ))}
-                        </select>
-                    </div>
-                    <button className='btn btn-primary' type='submit'>Search</button>
-                </form>
-                <div>
-                    {this.state.items.map(item=>(
-                        <div className="row align-items-center border border-style-inset margin-2 width-auto">
-                            <div className="col-md-3 col-xs-3 text-left width-auto">
-                            <img src={shop} alt="Shop image" className="width-100 margin-10"/>
-
-                            </div>
-                            <div  className="col-md-8 col-xs-8 text-left width-auto">
-                                Item :{item.itemName} <br />
-                                Price : {item.itemPrice} <br />
-                                Mass : {item.itemMass} <br />
-                                Quantity : {item.itemQuantity} <br />
-                            </div>
-                        </div>
-                    ))}      
-                </div>
+                <ComplexGrid items={this.state.items}/>
             </div>
         )
     }

@@ -42,6 +42,7 @@ export function getitem(shopid, callback) {
         {
            //localStorage.setItem('LoginToken', JSON.stringify(response.data))
            console.log("ERROR",response.data.message);
+           console.log("%%%%%%", response.data)
         }
       })
       .catch(function (error) {

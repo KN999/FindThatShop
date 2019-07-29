@@ -37,7 +37,7 @@ exports.AddItem = (itemDetails, callback) => {
                     shopItem.items.push(element)
                 })
                 
-                db.collection('item').remove({ shopid : itemDetails.shopid })
+                db.collection('item').deleteOne({ shopid : itemDetails.shopid })
                 
             }
         }, () => {
@@ -67,16 +67,17 @@ exports.GetItems = (shopid, callback) => {
             code : 501, // Wrong Shopid
             message : "Failure",
         };
-
+        console.log("##########",shopid)
         // Find the userShop delete it and add it to 
         db.collection('item').find({ shopid: shopid }).forEach(function (dbitem) {
             if (dbitem) {
-
+                
                 result.code = 500; // Item Found
                 result.message = "Success"
-              result.item = dbitem
+                result.item = dbitem
+                console.log("found them")
             }
-    
+            console.log("DBITEM",dbitem)
         }, () => {    
                 callback(result)
             })
