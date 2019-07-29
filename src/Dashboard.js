@@ -1,48 +1,138 @@
 import React, { Component } from 'react';
 import { getshop } from './service-layer/shops'
 import { connect } from 'react-redux';
-import shop from './shop.jpg'
 import './Dashboard.css'
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Shop from './shop.jpg'
+import add from './addSign.png'
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1
+    },
+    paper: {
+        padding: theme.spacing(2),
+        margin: 'auto',
+        maxWidth: 1000
+    },
+    paper2: {
+        padding: theme.spacing(2),
+        margin: 'auto',
+        maxWidth: 160
+    },
+    image: {
+        width: 128,
+        height: 128,
+    },
+    img: {
+        margin: 'auto',
+        display: 'block',
+        maxWidth: '100%',
+        maxHeight: '100%',
+    },
+    
+}));
+
+
+function ComplexGrid(props) {
+
+    const classes = useStyles();
+
+    const FetchShopDetails = (shopid)=> {
+        
+        console.log("Clicked",shopid);
+        {props.redirect(shopid)};
+    }
+
+    return (
+        <div className={classes.root}>
+            {props.shops.map(shop => (
+                <Paper className={classes.paper}>
+                    <Grid container spacing={2} >
+                        <Grid item>
+                            <ButtonBase className={classes.image}>
+                                <img className={classes.img} alt="complex" src={Shop} />
+                            </ButtonBase>
+                        </Grid>
+                        <Grid item xs={12} sm container className="text-align-left">
+                            <Grid item xs container direction="column" spacing={2}>
+                                <Grid item xs>
+                                    <Typography gutterBottom variant="subtitle1">
+                                        <legend>
+                                            {shop.shopName}
+                                        </legend>
+                                    </Typography>
+                                    <Typography gutterBottom variant="subtitle1">
+                                        Owner : {shop.shopOwner}
+                                    </Typography>
+                                    <Typography gutterBottom variant="subtitle1">
+                                        Address : {shop.shopAddress}
+                                    </Typography>
+                                    <Typography gutterBottom variant="subtitle1">
+                                        Contact Number : {shop.shopContactNo}
+                                    </Typography>
+                                </Grid>
+                                <Button onClick={ ()=> {FetchShopDetails(shop.shopid)}} >View Details</Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Paper>
+            ))}
+            
+                <Paper className={classes.paper2}>
+                    <Grid container spacing={1} >
+                        <Grid item>
+                            <ButtonBase className={classes.image}>
+                                <img className={classes.img} alt="complex" src={add} />
+                            </ButtonBase>
+                        </Grid>
+                    </Grid>
+                </Paper>
+            
+        </div>
+    );
+}
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            shops : [],
+            shops: [],
         }
     }
-    
+
     componentDidMount() {
         var self = this
-        getshop('p', (response) => {
-            self.setState({shops: response.data.shop.shops})
+        getshop('KN99', (response) => {
+            self.setState({ shops: response.data.shop.shops })
         })
 
     }
 
     render() {
 
-        var image = <img src={shop} alt="Shop image" className="width-100 margin-10"/>
+        const Redirect = (shopid) => {
+            console.log("$$$$$$$$$",shopid)
+            const { history } = this.props;
+            history.push({
+                    pathname: '/Dashboard/getshop/',
+                    search: '?shopid='+{shopid},
+                    state: { shopid: shopid }
+                  })
+        }
 
         console.log(this.props.user)
         console.log(this.state.shops)
-        return(
+        return (
             <div className="margin-100px">
                 <h1>Shops</h1>
-                {this.state.shops.map(shop=>(
-                    <div className="row align-items-center border border-style-inset margin-2 width-auto">
-                        <div className="col-md-3 col-xs-3 text-left width-auto">
-                            {image}
-                        </div>
-                        <div  className="col-md-8 col-xs-8 text-left width-auto">
-                            Shop :{shop.shopName} <br />
-                            Owner : {shop.shopOwner} <br />
-                            Address : {shop.shopAddress} <br />
-                            Contact Number : {shop.shopContactNo} <br />
-                        </div>
-                    </div>
-                ))}                    
+                <ComplexGrid shops={this.state.shops} redirect = {Redirect}/>
             </div>
         );
     }
@@ -50,7 +140,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
     return {
-      user: state
+        user: state
     }
 };
 

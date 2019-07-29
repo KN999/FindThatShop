@@ -9,3 +9,11 @@
 .width-auto {
     width: auto;
 }
+
+.row {
+    margin-right: 0px;
+}
+
+.text-align-left {
+    text-align: left;
+}
