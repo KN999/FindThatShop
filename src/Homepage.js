@@ -35,7 +35,7 @@ export default class Homepage extends React.Component {
                     <h1 className="font-size-3-5 font-color-white padding-top-175px">Find That Shop</h1>
                     <form onSubmit={this.onSubmit}>
                         <div className="input-group width-65 ">
-                            <input type="text" name="thing" className="form-control" placeholder="Where I can find a..." onChange={this.onChange}/>
+                            <input type="text" name="thing" className="form-control" placeholder="where I can find a..." onChange={this.onChange}/>
                             <span className="input-group-btn">
                                 <button type="submit" className="btn btn-primary">Go</button>
                             </span>

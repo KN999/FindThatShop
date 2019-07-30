@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component }from 'react';
+import { useState } from 'react'
 import { getshop } from './service-layer/shops'
 import { connect } from 'react-redux';
 import './Dashboard.css'
@@ -7,9 +8,10 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import Button from '@material-ui/core/Button';
 import Shop from './shop.jpg'
 import add from './addSign.png'
-import Button from '@material-ui/core/Button';
+import AddShop from './AddShop'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -38,11 +40,26 @@ const useStyles = makeStyles(theme => ({
     
 }));
 
+function AddShopButton (props) {
+    const classes = useStyles();
+    return (
+        <Paper className={classes.paper2}>
+            <Grid container spacing={1} >
+                <Grid item>
+                    <ButtonBase className={classes.image} onClick={props.onClick}>
+                        <img className={classes.img} alt="complex" src={add} />
+                    </ButtonBase>
+                </Grid>
+            </Grid>
+        </Paper>
+    )
+}
+
 
 function ComplexGrid(props) {
 
     const classes = useStyles();
-
+    const [addshop, setaddshop] = useState(false);
     const FetchShopDetails = (shopid)=> {
         
         console.log("Clicked",shopid);
@@ -83,17 +100,7 @@ function ComplexGrid(props) {
                     </Grid>
                 </Paper>
             ))}
-            
-                <Paper className={classes.paper2}>
-                    <Grid container spacing={1} >
-                        <Grid item>
-                            <ButtonBase className={classes.image}>
-                                <img className={classes.img} alt="complex" src={add} />
-                            </ButtonBase>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            
+            {addshop === true ? <AddShop onClick={ () => setaddshop(false)}/> : <AddShopButton onClick={ () => setaddshop(true) }/>}
         </div>
     );
 }
