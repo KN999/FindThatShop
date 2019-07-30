@@ -125,7 +125,6 @@ class Dashboard extends Component {
     render() {
 
         const Redirect = (shopid) => {
-            console.log("$$$$$$$$$",shopid)
             const { history } = this.props;
             history.push({
                     pathname: '/Dashboard/getshop/',
@@ -134,8 +133,6 @@ class Dashboard extends Component {
                   })
         }
 
-        console.log(this.props.user)
-        console.log(this.state.shops)
         return (
             <div className="margin-100px">
                 <h1>Shops</h1>

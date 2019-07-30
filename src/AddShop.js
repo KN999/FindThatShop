@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
-import Shop from './shop.jpg'
+import ShopImage from './shop.jpg'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -86,12 +86,12 @@ export default class AddShop extends React.Component {
         //    history.push("/dashboard")
         
         return (
-            <ShopDetails onSubmit={this.onSubmit} onChange={this.onChange}/>
+            <Shop onSubmit={this.onSubmit} onChange={this.onChange}/>
         );
     }
 }
 
-function ShopDetails(props) {
+function Shop(props) {
 
     const classes = useStyles();
 
@@ -102,7 +102,7 @@ function ShopDetails(props) {
                     <Grid container spacing={1} >
                         <Grid item>
                             <ButtonBase className={classes.image}>
-                                <img className={classes.img} alt="complex" src={Shop} />
+                                <img className={classes.img} alt="complex" src={ShopImage} />
                             </ButtonBase>
                         </Grid>
                         <Grid item xs={12} sm container className="text-align-left">
