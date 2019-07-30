@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
+import Shop from './shop.jpg'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -67,6 +68,8 @@ export default class AddShop extends React.Component {
         }
         
         addshop(shop, (redirect) => {
+
+            this.props.onClick()
             if(redirect === 0) {
                 this.setState({
                     redirect : true
@@ -93,16 +96,18 @@ function ShopDetails(props) {
     const classes = useStyles();
 
     return (
-        <div className="margin-top-50px">
+        <div className="margin-20px">
             <form className='align-webkit-center' onSubmit={props.onSubmit}>
                 <Paper className={classes.paper}>
                     <Grid container spacing={1} >
+                        <Grid item>
+                            <ButtonBase className={classes.image}>
+                                <img className={classes.img} alt="complex" src={Shop} />
+                            </ButtonBase>
+                        </Grid>
                         <Grid item xs={12} sm container className="text-align-left">
                             <Grid item xs container direction="column" spacing={2}>
                                 <Grid item xs>
-                                    <Typography gutterBottom variant="subtitle1">
-                                        <input type='text' name='username' placeholder='username' className='form-control' onChange={props.onChange} />
-                                    </Typography>
                                     <Typography gutterBottom variant="subtitle1">
                                         <input type='text' name='shopname' placeholder='Shop Name' className='form-control' onChange={props.onChange} />
                                     </Typography>

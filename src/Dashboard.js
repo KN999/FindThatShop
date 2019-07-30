@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component }from 'react';
+import { useState } from 'react'
 import { getshop } from './service-layer/shops'
 import { connect } from 'react-redux';
 import './Dashboard.css'
@@ -39,11 +40,26 @@ const useStyles = makeStyles(theme => ({
     
 }));
 
+function AddShopButton (props) {
+    const classes = useStyles();
+    return (
+        <Paper className={classes.paper2}>
+            <Grid container spacing={1} >
+                <Grid item>
+                    <ButtonBase className={classes.image} onClick={props.onClick}>
+                        <img className={classes.img} alt="complex" src={add} />
+                    </ButtonBase>
+                </Grid>
+            </Grid>
+        </Paper>
+    )
+}
+
 
 function ComplexGrid(props) {
 
     const classes = useStyles();
-
+    const [addshop, setaddshop] = useState(false);
     const FetchShopDetails = (shopid)=> {
         
         console.log("Clicked",shopid);
@@ -84,17 +100,7 @@ function ComplexGrid(props) {
                     </Grid>
                 </Paper>
             ))}
-                <AddShop />
-                <Paper className={classes.paper2}>
-                    <Grid container spacing={1} >
-                        <Grid item>
-                            <ButtonBase className={classes.image} >
-                                <img className={classes.img} alt="complex" src={add} />
-                            </ButtonBase>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            
+            {addshop === true ? <AddShop onClick={ () => setaddshop(false)}/> : <AddShopButton onClick={ () => setaddshop(true) }/>}
         </div>
     );
 }
