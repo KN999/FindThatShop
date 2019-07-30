@@ -1,41 +1,13 @@
-// Need to remove state username and add state image
-import React, {Component} from 'react'
-import { addshop } from './service-layer/shops'
-import './AddShop.css'
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react'
+import { addshop } from '../../utils/service-layer/shops'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
-import ShopImage from './shop.jpg'
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1
-    },
-    paper: {
-        padding: theme.spacing(2),
-        margin: 'auto',
-        maxWidth: 1000
-    },
-    paper2: {
-        padding: theme.spacing(2),
-        margin: 'auto',
-        maxWidth: 160
-    },
-    image: {
-        width: 128,
-        height: 128,
-    },
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-    },
-    
-}));
+import ShopImage from '../../utils/assets/shop.jpg'
+import { useStyles } from '../../utils/use-style/useStyle'
+import './AddShop.css'
 
 export default class AddShop extends React.Component {
     constructor (props) {
@@ -68,7 +40,6 @@ export default class AddShop extends React.Component {
         }
         
         addshop(shop, (redirect) => {
-
             this.props.onClick()
             if(redirect === 0) {
                 this.setState({
@@ -79,19 +50,13 @@ export default class AddShop extends React.Component {
     };
 
     render() {
-
-        //const { history } = this.props;
-
-        //if (this.state.redirect == true)
-        //    history.push("/dashboard")
-        
         return (
-            <Shop onSubmit={this.onSubmit} onChange={this.onChange}/>
+            <ShopDetails onSubmit={this.onSubmit} onChange={this.onChange}/>
         );
     }
 }
 
-function Shop(props) {
+function ShopDetails(props) {
 
     const classes = useStyles();
 

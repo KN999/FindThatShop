@@ -1,9 +1,6 @@
-import React,{Component} from 'react';
-import './Navbar.css';
+import React from 'react';
 import { connect } from 'react-redux';
-//import { log } from './action/log'
-
-
+import './Navbar.css';
 
 class SubNav1 extends React.Component{
     render() {
@@ -55,14 +52,5 @@ const mapStateToProps = (state) => {
       user: state
     }
 };
-/*
-const mapDispatchToProps = (dispatch) => {
-    return {
-        log: (auth) => {
-            dispatch(log(auth));
-        }
-    }
-};
 
-*/
 export default connect(mapStateToProps)(Navbar);

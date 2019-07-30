@@ -1,44 +1,17 @@
-import React, { Component }from 'react';
-import { useState } from 'react'
-import { getshop } from './service-layer/shops'
+import React, { useState } from 'react';
+import { getshop } from '../../utils/service-layer/shops'
 import { connect } from 'react-redux';
-import './Dashboard.css'
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
-import Shop from './shop.jpg'
-import add from './addSign.png'
-import AddShop from './AddShop'
+import ShopImage from '../../utils/assets/shop.jpg'
+import AddImage from '../../utils/assets/addSign.png'
+import AddShop from '../AddShop/AddShop'
+import { useStyles } from '../../utils/use-style/useStyle'
+import './Dashboard.css'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1
-    },
-    paper: {
-        padding: theme.spacing(2),
-        margin: 'auto',
-        maxWidth: 1000
-    },
-    paper2: {
-        padding: theme.spacing(2),
-        margin: 'auto',
-        maxWidth: 160
-    },
-    image: {
-        width: 128,
-        height: 128,
-    },
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-    },
-    
-}));
 
 function AddShopButton (props) {
     const classes = useStyles();
@@ -47,7 +20,7 @@ function AddShopButton (props) {
             <Grid container spacing={1} >
                 <Grid item>
                     <ButtonBase className={classes.image} onClick={props.onClick}>
-                        <img className={classes.img} alt="complex" src={add} />
+                        <img className={classes.img} alt="complex" src={AddImage} />
                     </ButtonBase>
                 </Grid>
             </Grid>
@@ -56,7 +29,7 @@ function AddShopButton (props) {
 }
 
 
-function ComplexGrid(props) {
+function Shops(props) {
 
     const classes = useStyles();
     const [addshop, setaddshop] = useState(false);
@@ -73,7 +46,7 @@ function ComplexGrid(props) {
                     <Grid container spacing={2} >
                         <Grid item>
                             <ButtonBase className={classes.image}>
-                                <img className={classes.img} alt="complex" src={Shop} />
+                                <img className={classes.img} alt="complex" src={ShopImage} />
                             </ButtonBase>
                         </Grid>
                         <Grid item xs={12} sm container className="text-align-left">
@@ -105,7 +78,7 @@ function ComplexGrid(props) {
     );
 }
 
-class Dashboard extends Component {
+class Dashboard extends React.Component {
     constructor(props) {
         super(props);
 
@@ -136,7 +109,7 @@ class Dashboard extends Component {
         return (
             <div className="margin-100px">
                 <h1>Shops</h1>
-                <ComplexGrid shops={this.state.shops} redirect = {Redirect}/>
+                <Shops shops={this.state.shops} redirect = {Redirect}/>
             </div>
         );
     }
