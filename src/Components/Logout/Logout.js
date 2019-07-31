@@ -8,6 +8,7 @@ class Logout extends React.Component {
         
         this.props.logoutCall();
         var { history } = this.props;
+        localStorage.setItem('Token', "")
         history.push('/')
 
         return (null);

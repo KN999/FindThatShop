@@ -14,7 +14,6 @@ export default class AddShop extends React.Component {
         super(props)
         console.log(this.state)
         this.state = {
-            username : '', 
             shopname : '',
             shopowner : '',
             shopaddress : '',
@@ -32,7 +31,7 @@ export default class AddShop extends React.Component {
     onSubmit = (event) => {
         event.preventDefault()
         var shop = {
-            username : this.state.username,
+            token : localStorage.getItem('Token'),
             shopname: this.state.shopname,
             shopowner: this.state.shopowner,
             shopaddress: this.state.shopaddress,

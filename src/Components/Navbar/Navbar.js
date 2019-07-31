@@ -40,7 +40,7 @@ class Navbar extends React.Component {
                         FindThatShop
                     </a>
                     
-                    {this.props.user.auth === true ? <SubNav2/> : <SubNav1/>}
+                    {Boolean(localStorage.getItem('Token')) === true ? <SubNav2/> : <SubNav1/>}
                 </nav>
             </div>
         )

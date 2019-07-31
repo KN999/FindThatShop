@@ -9,7 +9,8 @@ import GetShop from '../GetShop/GetShop'
 import './App.css';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 
 export default class App extends Component {
@@ -22,15 +23,26 @@ export default class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
-            <Route exact path='/Dashboard/getshop' component={GetShop} /> 
+            <PrivateRoute authed={Boolean(localStorage.getItem('Token'))} exact path='/Dashboard/getshop' component={GetShop} />
             <Route exact path='/Logout' component={Logout} /> 
             <Route exact path='/' component={Homepage} />
             <Route path='/Register' component={Register} />
             <Route path='/Login' component={Login} />
-            <Route exact path='/Dashboard' component={Dashboard} />
+            <PrivateRoute authed={Boolean(localStorage.getItem('Token'))} exact path='/Dashboard' component={Dashboard} />
           </div> 
         </Router>
         
     );
   }
+}
+
+function PrivateRoute ({component: Component, authed, ...rest}) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => Boolean(localStorage.getItem('Token'))
+        ? <Component {...props} />
+        : <Redirect to={{pathname: '/Login', state: {from: props.location}}} />}
+    />
+  )
 }

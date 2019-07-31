@@ -89,7 +89,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         var self = this
-        getshop('KN99', (response) => {
+        getshop(localStorage.getItem('Token'), (response) => {
             self.setState({ shops: response.data.shop.shops })
         })
 
