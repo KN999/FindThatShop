@@ -6,20 +6,13 @@ var DatabaseClient = require('../../database-layer/shops');
 var Token = require('../../business-layer/Auth');
 
 router.get('/getshops', function(req, res) {
-
-    if ((Token.ValidateToken(req.query.token)).auth === true) {
-        username = auth.decoded;
-        DatabaseClient.GetShops(username, (result) => {
-            res.send(result);
-        });
-    }
-    else {
-        res.send(auth)
-    }
+    var username = req.query.token;
+    DatabaseClient.GetShops(username, (result) => {
+        res.send(result);
+    })
 })
 
 router.post('/addshop', function (req, res) {
-    var auth = Token.ValidateToken(req.body.token);
 
     var shop = {
         shopid : crypto.randomBytes(16).toString("hex"),
@@ -30,8 +23,7 @@ router.post('/addshop', function (req, res) {
         image : '',
     };
 
-    if (shop.shopid && auth.auth === true) {
-        shop.username = auth.decoded;
+    if (shop.shopid) {
         console.log("$$$$$$$",shop.shopid)
         DatabaseClient.AddShop(shop, (result) => {
             res.send(result);

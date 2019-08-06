@@ -21,7 +21,7 @@ exports.ValidateUser = function (user, callback) {
             if (dbuser.password === user.password) {
                 result.code = 102; // 102 - Credential Matched
                 result.message = 'Success';
-                result.token = Token.TokenGenerator(user.username)
+                result.token = user.username;
             }
             else {
                 result.code = 101; //101 - Invalid Password
@@ -73,7 +73,7 @@ exports.CheckUsername = (username, callback) => {
 
 exports.RegisterUser = (user, callback) => {
 
-    var token = Token.TokenGenerator(user.username);
+    var token = user.username;
 
     mongodb.connect(url, function (err, client) {
 
