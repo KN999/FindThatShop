@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import './Login.css'
-import { login } from './service-layer/users'
+import { login } from '../../utils/service-layer/users'
 import { connect } from 'react-redux';
-import { loginaction } from './action/log'
-
+import { loginaction } from '../../utils/action/log'
+import './Login.css'
 
 class Login extends Component  {
     constructor(props) {
@@ -32,7 +31,6 @@ class Login extends Component  {
             password : this.state.password
         }
 
-        // axios call
         login(user, (redirect) => {
             if(redirect === 0) {
                 this.props.loginCall(user.username)
@@ -96,6 +94,5 @@ const mapDispatchToProps = dispatch => {
         loginCall: username => dispatch(loginaction(username))
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

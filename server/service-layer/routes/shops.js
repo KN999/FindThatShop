@@ -3,20 +3,19 @@ var router = express.Router();
 const crypto = require("crypto")
 
 var DatabaseClient = require('../../database-layer/shops');
+var Token = require('../../business-layer/Auth');
 
 router.get('/getshops', function(req, res) {
-
-    username = req.query.username
-
+    var username = req.query.token;
     DatabaseClient.GetShops(username, (result) => {
         res.send(result);
-    });
+    })
 })
 
 router.post('/addshop', function (req, res) {
+
     var shop = {
         shopid : crypto.randomBytes(16).toString("hex"),
-        username: req.body.username,
         shopName: req.body.shopname,
         shopOwner: req.body.shopowner,
         shopAddress: req.body.shopaddress,
@@ -30,6 +29,10 @@ router.post('/addshop', function (req, res) {
             res.send(result);
         });
     }
+    else {
+        res.send(auth)
+    }
+
 });
 
 

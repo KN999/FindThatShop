@@ -5,6 +5,8 @@ var assert = require('assert');
 
 var url = 'mongodb://127.0.0.1:27017/';
 
+var Token = require('../business-layer/Auth');
+
 exports.ValidateUser = function (user, callback) {
 
     mongodb.connect(url, function (err, client) {
@@ -19,6 +21,7 @@ exports.ValidateUser = function (user, callback) {
             if (dbuser.password === user.password) {
                 result.code = 102; // 102 - Credential Matched
                 result.message = 'Success';
+                result.token = user.username;
             }
             else {
                 result.code = 101; //101 - Invalid Password
@@ -69,18 +72,22 @@ exports.CheckUsername = (username, callback) => {
 
 
 exports.RegisterUser = (user, callback) => {
+
+    var token = user.username;
+
     mongodb.connect(url, function (err, client) {
 
         assert.equal(null, err);
 
         var db = client.db('shopkeeper');
         var result = {};
-
+    
         // Add user
         db.collection('shopuser').insertOne(user, function (err, res) {
 
             result.code = 303;// 303 - user registered successfully
             result.message = 'Success';
+            result.token = token;
             console.log("item inserted");
 
             callback(result);

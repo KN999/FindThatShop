@@ -1,22 +1,22 @@
 var jwt = require('jsonwebtoken');
-var bcrypt = require('bcryptjs');
+//var bcrypt = require('bcryptjs');
 var config = require('../config');
 
-exports.Token = (username) => {
+exports.TokenGenerator = (username) => {
     var token = jwt.sign({ username : username }, config.secret, {
         expiresIn: 86400
     }, () => {
-        return json({ auth: true, token: token });
+        return token;
     });
 }
 
 exports.ValidateToken = (Token) => {
     var token = Token
-    if (!token) return res.status(501).send({ auth: false, message: 'No token provided.' });
+    if (!token) return { auth: false, message: 'No token provided.' };// 601 - No token provided
   
     jwt.verify(token, config.secret, function(err, decoded) {
-      if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+      if (err) return { auth: false, message: 'Failed to authenticate token.' }; // 602 - Invalid Token
       
-      res.status(200).send(decoded);
+      return { auth: true, message: 'Success', decoded : decoded}; // 600 - Valid Token
     });
 }

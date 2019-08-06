@@ -1,41 +1,14 @@
-import React, {Component} from 'react'
-import { additem } from './service-layer/inventory'
-import { getshop } from './service-layer/shops'
-import './AddItem.css'
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { additem } from '../../utils/service-layer/inventory';
+import { getshop } from '../../utils/service-layer/shops'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
-import Shop from './shop.jpg'
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1
-    },
-    paper: {
-        padding: theme.spacing(2),
-        margin: 'auto',
-        maxWidth: 1000
-    },
-    paper2: {
-        padding: theme.spacing(2),
-        margin: 'auto',
-        maxWidth: 160
-    },
-    image: {
-        width: 128,
-        height: 128,
-    },
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-    },
-    
-}));
+import ShopImage from '../../utils/assets/shop.jpg'
+import { useStyles } from '../../utils/use-style/useStyle'
+import './AddItem.css'
 
 export default class AddItem extends React.Component {
     constructor (props) {
@@ -84,20 +57,13 @@ export default class AddItem extends React.Component {
     }
 
     render() {
-
-        //const { history } = this.props;
-        //if (this.state.redirect == true)
-        //{
-        //    history.push("/dashboard")
-        //}
-    
         return (
-            <Item onSubmit={this.onSubmit} onChange={this.onChange}/>
+            <ItemDetails onSubmit={this.onSubmit} onChange={this.onChange}/>
         );
     }
 }
 
-function Item(props) {
+function ItemDetails(props) {
 
     const classes = useStyles();
 
@@ -108,7 +74,7 @@ function Item(props) {
                     <Grid container spacing={1} >
                         <Grid item>
                             <ButtonBase className={classes.image}>
-                                <img className={classes.img} alt="complex" src={Shop} />
+                                <img className={classes.img} alt="complex" src={ShopImage} />
                             </ButtonBase>
                         </Grid>
                         <Grid item xs={12} sm container className="text-align-left">

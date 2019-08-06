@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function addshop(shop, callback) {
     axios.post('/shop/addshop', {
-        username: shop.username,
+        token: shop.token,
         shopname: shop.shopname,
         shopowner: shop.shopowner,
         shopaddress: shop.shopaddress,
@@ -13,7 +13,6 @@ export function addshop(shop, callback) {
            
         if(response.data.code === 403) 
         {  
-            //localStorage.setItem('LoginToken', JSON.stringify(response.data))
             callback(0)
         }
         else 
@@ -27,9 +26,9 @@ export function addshop(shop, callback) {
       });
 }
 
-export function getshop(username, callback) {
+export function getshop(token, callback) {
     axios.get('/shop/getshops', { params :{
-        username: username,
+        token: token,
       }})
       .then( (response) => {
         

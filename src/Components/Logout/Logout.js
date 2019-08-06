@@ -1,6 +1,6 @@
-import React , {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { logoutaction } from './action/log'
+import { logoutaction } from '../../utils/action/log'
 
 class Logout extends React.Component {
 
@@ -8,6 +8,7 @@ class Logout extends React.Component {
         
         this.props.logoutCall();
         var { history } = this.props;
+        localStorage.setItem('Token', "")
         history.push('/')
 
         return (null);

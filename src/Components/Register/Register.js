@@ -1,6 +1,6 @@
 import React, {Component}  from 'react';
+import { register } from '../../utils/service-layer/users'
 import './Register.css'
-import { register } from './service-layer/users'
 
 class Register extends Component {
 

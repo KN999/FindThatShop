@@ -12,6 +12,8 @@ export function register(user, callback) {
         if(response.data.code === 303) 
         {  
             //localStorage.setItem('LoginToken', JSON.stringify(response.data))
+            localStorage.setItem('Token', user.username)
+            console.log(")))))))))))))",localStorage.getItem('Token'))
             callback(0)
         }
         else 
@@ -35,6 +37,7 @@ export function login(user, callback) {
         if(response.data.code === 102) 
         {  
             //localStorage.setItem('LoginToken', JSON.stringify(response.data))
+            localStorage.setItem('Token', user.username)
             callback(0)
         }
         else 

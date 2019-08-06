@@ -1,42 +1,14 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import shop from './shop.jpg'
-import { getshop } from './service-layer/shops'
-import { getitem } from './service-layer/inventory'
+import ShopImage from '../../utils/assets/shop.jpg'
+import { getitem } from '../../utils/service-layer/inventory'
+import AddImage from '../../utils/assets/addSign.png'
+import AddItem from '../AddItem/AddItem'
+import { useStyles } from '../../utils/use-style/useStyle'
 import './GetShop.css'
-import add from './addSign.png'
-import AddItem from './AddItem'
-
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    maxWidth: 500,
-  },
-  paper2: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    maxWidth: 160
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-  },
-}));
 
 function AddItemButton (props) {
     const classes = useStyles();
@@ -45,7 +17,7 @@ function AddItemButton (props) {
             <Grid container spacing={1} >
                 <Grid item>
                     <ButtonBase className={classes.image} onClick={props.onClick}>
-                        <img className={classes.img} alt="complex" src={add} />
+                        <img className={classes.img} alt="complex" src={AddImage} />
                     </ButtonBase>
                 </Grid>
             </Grid>
@@ -53,7 +25,7 @@ function AddItemButton (props) {
     )
 }
 
-function ComplexGrid(props) {
+function Items(props) {
 
     const classes = useStyles();
     const [additem, setadditem] = useState(false);
@@ -61,11 +33,11 @@ function ComplexGrid(props) {
     return (
         <div className="makeStyles-root-1 row">
             {props.items.map(Item=>(
-                <Paper className={classes.paper}>
+                <Paper className={classes.paper3}>
                 <Grid container spacing={2}>
                 <Grid item>
                     <ButtonBase className={classes.image}>
-                    <img className={classes.img} alt="complex" src={shop} />
+                    <img className={classes.img} alt="complex" src={ShopImage} />
                     </ButtonBase>
                 </Grid>
                 <Grid item xs={12} sm container className="text-align-left">
@@ -122,7 +94,7 @@ export default class GetShop extends React.Component {
     render() {
         return(
             <div className="margin-top-50px">
-                <ComplexGrid items={this.state.items} shopid = {this.props.location.state.shopid}/>
+                <Items items={this.state.items} shopid = {this.props.location.state.shopid}/>
             </div>
         )
     }
