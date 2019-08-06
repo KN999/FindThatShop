@@ -1,5 +1,5 @@
-.width-65 {
-  width : 65%;
+.width-45 {
+  width : 45%;
 }
 
 .align-webkit-center {
@@ -34,7 +34,8 @@
 
 .backImage {
   background-image: url(https://www.shoplincoln.co.uk/media/made/media/hero/high_street_shopping_lincoln_1440_516_70.jpg);
-  height: 516px;
+  height: 593px;
+  background-size: cover;
 }
 
 .padding-top-175px {

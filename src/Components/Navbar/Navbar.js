@@ -20,8 +20,7 @@ class SubNav2 extends React.Component{
         return (
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav mr-auto mt-2">
-                    <li className="nav-item"><a className="nav-link" href="/Dashboard/AddShop">Add Shop</a></li>
-                    <li className="nav-item"><a className="nav-link" href="/Dashboard/Additem">Add Item</a></li>
+                    <li className="nav-item"><a className="nav-link" href="/Dashboard">Shops</a></li>
                 </ul>
                 <ul className="navbar-nav ml-auto mt-2">
                     <li className="nav-item"><a className="nav-link" href="/Logout">Logout</a></li>
