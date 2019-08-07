@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getshop } from '../../utils/service-layer/shops'
+import { usershops } from '../../utils/service-layer/shops'
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -89,7 +89,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         var self = this
-        getshop(localStorage.getItem('Token'), (response) => {
+        usershops(localStorage.getItem('Token'), (response) => {
             self.setState({ shops: response.data.shop.shops })
         })
 

@@ -5,9 +5,9 @@ const crypto = require("crypto")
 var DatabaseClient = require('../../database-layer/shops');
 var Token = require('../../business-layer/Auth');
 
-router.get('/getshops', function(req, res) {
+router.get('/usershops', function(req, res) {
     var username = req.query.token;
-    DatabaseClient.GetShops(username, (result) => {
+    DatabaseClient.UserShops(username, (result) => {
         res.send(result);
     })
 })

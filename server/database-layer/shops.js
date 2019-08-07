@@ -53,7 +53,7 @@ exports.AddShop = (shopDetails, callback) => {
     });
 }
 
-exports.GetShops = (username, callback) => {
+exports.UserShops = (username, callback) => {
     mongodb.connect(url, function (err, client) {
 
         assert.equal(null, err);

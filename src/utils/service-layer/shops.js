@@ -26,8 +26,8 @@ export function addshop(shop, callback) {
       });
 }
 
-export function getshop(token, callback) {
-    axios.get('/shop/getshops', { params :{
+export function usershops(token, callback) {
+    axios.get('/shop/usershops', { params :{
         token: token,
       }})
       .then( (response) => {
