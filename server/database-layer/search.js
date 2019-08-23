@@ -4,6 +4,7 @@ var mongodb = require('mongodb');
 var assert = require('assert');
 
 var url = 'mongodb://127.0.0.1:27017/';
+var DatabaseClient = require('./shops');
 
 exports.FindThatShop = (query, callback) => {
     mongodb.connect(url, function (err, client) {
@@ -20,13 +21,15 @@ exports.FindThatShop = (query, callback) => {
         db.collection('item').find({ "items.itemName" : query }).forEach(function (dbshop) {
             if (dbshop) {
                 console.log("Found that shop")
-                result.code = 404; // Success in retrieving data
+                result.code = 405; // Success in retrieving data
                 result.message = "Data found";
-                queriedShops.push(dbshop);
+                queriedShops.push(dbshop.shopid);
                 result.shop = queriedShops;
+    
             }
         },() => {
-                callback(result);
+            DatabaseClient.GetShop(result.shop, callback)
+                //callback(result);
         })
     });
 }

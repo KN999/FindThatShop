@@ -35,5 +35,4 @@ router.post('/addshop', function (req, res) {
 
 });
 
-
 module.exports = router;
