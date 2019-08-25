@@ -23,13 +23,12 @@ exports.FindThatShop = (query, callback) => {
                 console.log("Found that shop")
                 result.code = 405; // Success in retrieving data
                 result.message = "Data found";
-                queriedShops.push(dbshop.shopid);
+                queriedShops.push(dbshop);
                 result.shop = queriedShops;
     
             }
         },() => {
-            DatabaseClient.GetShop(result.shop, callback)
-                //callback(result);
+                callback(result);
         })
     });
 }
