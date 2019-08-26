@@ -6,6 +6,7 @@ var router = express.Router();
 var userRoute =  require('./service-layer/routes/users.js')
 var shopRoute = require('./service-layer/routes/shops.js')
 var inventoryRoute = require('./service-layer/routes/inventory.js')
+var searchRoute = require('./service-layer/routes/search.js')
 
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
@@ -18,6 +19,7 @@ router.use(bodyParser.json())
 app.use('/user', userRoute);
 app.use('/shop', shopRoute);
 app.use('/inventory', inventoryRoute);
+app.use('/search', searchRoute);
 
 app.get('/', function(req, res, next) {
     res.send('Hello World');

@@ -1,6 +1,6 @@
 import React from 'react';
 import { additem } from '../../utils/service-layer/inventory';
-import { getshop } from '../../utils/service-layer/shops'
+import { usershops } from '../../utils/service-layer/shops'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -25,7 +25,7 @@ export default class AddItem extends React.Component {
 
     componentDidMount() {
         var self = this
-        getshop('c', (response) => {
+        usershops('c', (response) => {
             self.setState({shops: response.data.shop.shops})
         })
 

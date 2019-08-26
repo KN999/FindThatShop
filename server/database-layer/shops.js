@@ -53,7 +53,7 @@ exports.AddShop = (shopDetails, callback) => {
     });
 }
 
-exports.GetShops = (username, callback) => {
+exports.UserShops = (username, callback) => {
     mongodb.connect(url, function (err, client) {
 
         assert.equal(null, err);
@@ -73,5 +73,34 @@ exports.GetShops = (username, callback) => {
         },() => {
                 callback(result);
         })
+    });
+}
+
+exports.GetShop = (shopids, callback) => {
+    mongodb.connect(url, function (err, client) {
+
+        assert.equal(null, err);
+        var db = client.db('shopkeeper');
+        var result = {
+            code : 405, // No shops Found
+            message : "No shop found",
+        };
+
+        var shops = [];
+
+        shopids.forEach(function(shopid) {
+            db.collection('shop').find({ shopid: shopid }).forEach(function (dbshop) {
+                if (dbshop) {
+                    result.code = 404; // Success in retrieving data
+                    result.message = "Data found";
+                    shops.push(dbshop);
+                    result.shop = shops;
+                }
+            })
+        },() => {
+            console.log("$$$$$$$$",result.shop)
+            callback(result);
+        })
+        
     });
 }
