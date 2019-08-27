@@ -1,6 +1,39 @@
 # FindThatShop
 
-FindThatShop find the shops that are nearby and give you the list of shops that has the item you searched.
+FindThatShop find the shops that are nearby and give you the list of shops that has the item you searched.<br><br>
+There will be two types of people that will use this - 
+* Customer
+* Shop Owner
+
+Customer can search things that the Shop Owner sell and it's availability. Customer Don't need to register or login to search things.
+
+* Customer View :
+<br><br>
+![HomePage](./public/HomePage.png)
+<br><br>
+Customer can search the item he or she is looking for.
+<br><br>
+![Search](./public/Search.png)
+<br><br>
+
+Shop Owner needs to Register thier shops in order to let customer view thier details. Shop owner can Manage their Shops easily with this.
+
+* Shop Owner View : <br><br>
+Shop Owner can Register themselfs<br><br>
+![Register](./public/Register.png)
+<br><br>
+Shop Owner can Login in order to manage shops
+<br><br>
+![Login](./public/Login.png)
+<br><br>
+They can add shops
+<br><br>
+![Shops](./public/Shops.png)
+<br><br>
+ They can add items to a shop
+<br><br>
+![Items](./public/Items.png)
+<br><br>
 
 ## Getting Started & Installing
 
