@@ -27,10 +27,16 @@ function Shops(props) {
     
     })
 
+    const FetchShopDetails = (shopid)=> {
+        
+        console.log("Clicked",shopid);
+        {props.redirect(shopid)};
+    }
+
     return (
         <div className={classes.root}>
             {qshops.map(Item => (
-                <Paper className={classes.paper3}>
+                <Paper className={classes.paper4}>
                 <Grid container spacing={2}>
                 <Grid item>
                     <ButtonBase className={classes.image}>
@@ -54,6 +60,7 @@ function Shops(props) {
                     <Grid item>
                     <Typography variant="subtitle1">₹{Item.itemPrice}</Typography>
                     </Grid>
+                    <Button onClick={ ()=> {FetchShopDetails(Item.shopid)}} >Shop Details</Button>
                 </Grid>
                 </Grid>
             </Paper>
@@ -90,6 +97,15 @@ export default class Homepage extends React.Component {
     };
 
     render() {
+
+        const Redirect = (shopid) => {
+            const { history } = this.props;
+            history.push({
+                    pathname: '/Dashboard/getshop/',
+                    search: '?shopid='+{shopid},
+                    state: { shopid: shopid }
+                  })
+        }
         
         return (
             <div class="backImage">
@@ -105,7 +121,7 @@ export default class Homepage extends React.Component {
                     </form>
                 </div>
                 <div>
-                <Shops shops={this.state.shops} query={this.state.thing}/>
+                <Shops shops={this.state.shops} query={this.state.thing} redirect={Redirect}/>
                 </div>
             </div>
         )

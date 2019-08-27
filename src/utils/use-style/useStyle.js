@@ -19,6 +19,11 @@ export const useStyles = makeStyles(theme => ({
         margin: 'auto',
         maxWidth: 500,
     },
+    paper4: {
+        padding: theme.spacing(2),
+        margin: '20px auto 20px auto',
+        maxWidth: 350,
+    },
     image: {
         width: 128,
         height: 128,
