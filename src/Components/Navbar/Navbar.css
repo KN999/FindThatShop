@@ -2,3 +2,11 @@
 .navbar-dark .navbar-nav .nav-link {
     color: white;
 }
+
+.Navbar {
+    height: 7vh;
+}
+
+.navbar {
+    padding: 0rem 1rem 0.5rem;
+}

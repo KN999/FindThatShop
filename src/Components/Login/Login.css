@@ -6,6 +6,8 @@
     text-align: -webkit-center;
 }
 
-.Login {
-    padding-top : 3%;
+.login-heading {
+    background-color: #ffffff;
+    margin-bottom: 0px;
+    padding: 2rem 1rem;
 }

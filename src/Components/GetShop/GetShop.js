@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import ShopImage from '../../utils/assets/shop.jpg'
+import ItemImage from '../../utils/assets/item.jpg'
 import { getitem } from '../../utils/service-layer/inventory'
 import AddImage from '../../utils/assets/addSign.png'
 import AddItem from '../AddItem/AddItem'
@@ -37,7 +37,7 @@ function Items(props) {
                 <Grid container spacing={2}>
                 <Grid item>
                     <ButtonBase className={classes.image}>
-                    <img className={classes.img} alt="complex" src={ShopImage} />
+                    <img className={classes.img} alt="complex" src={ItemImage} />
                     </ButtonBase>
                 </Grid>
                 <Grid item xs={12} sm container className="text-align-left">
