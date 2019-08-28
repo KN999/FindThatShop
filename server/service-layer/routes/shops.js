@@ -15,6 +15,7 @@ router.get('/usershops', function(req, res) {
 router.post('/addshop', function (req, res) {
 
     var shop = {
+        username: req.body.username,
         shopid : crypto.randomBytes(16).toString("hex"),
         shopName: req.body.shopname,
         shopOwner: req.body.shopowner,
@@ -30,7 +31,7 @@ router.post('/addshop', function (req, res) {
         });
     }
     else {
-        res.send(auth)
+        res.send({code: 907, message:"can't preocess data"})
     }
 
 });

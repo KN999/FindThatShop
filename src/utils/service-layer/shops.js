@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function addshop(shop, callback) {
     axios.post('/shop/addshop', {
-        token: shop.token,
+        username: shop.token,
         shopname: shop.shopname,
         shopowner: shop.shopowner,
         shopaddress: shop.shopaddress,
