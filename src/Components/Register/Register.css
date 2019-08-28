@@ -6,6 +6,8 @@
     text-align: -webkit-center;
 }
 
-.background-#e9ecef {
-    background-color: #e9ecef;
+.register-heading {
+    background-color: #ffffff;
+    margin-bottom: 0px;
+    padding: 3rem 1rem;
 }

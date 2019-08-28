@@ -62,11 +62,11 @@ class Login extends Component  {
         }
 
         return (<div>
-            <div className="jumbotron">
+            <div className="jumbotron login-heading">
                 <h1>Login</h1>
             </div>
             <form onSubmit={this.onSubmit}> 
-            <div className="Login">
+            <div>
                 <div className="form-group align-webkit-center">
                     <input type="text" value={this.state.username} name="username" placeholder="Username" className="form-control width-25" onChange={this.onChange}/>
                 </div>

@@ -58,7 +58,7 @@ class Register extends Component {
         
         return (
             <div>
-                <div className="jumbotron">
+                <div className="jumbotron register-heading">
                     <h1>Register</h1>
                 </div>
                 <form className='align-webkit-center' onSubmit={this.onSubmit}>
