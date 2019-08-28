@@ -25,13 +25,13 @@ router.post('/addshop', function (req, res) {
     };
 
     if (shop.shopid) {
-        console.log("$$$$$$$",shop.shopid)
+        console.log("$$$$$$$",shop.shopid,shop.username);
         DatabaseClient.AddShop(shop, (result) => {
             res.send(result);
         });
     }
     else {
-        res.send({code: 907, message:"can't preocess data"})
+        res.send({code: 907, message:"can't preocess data"});
     }
 
 });
