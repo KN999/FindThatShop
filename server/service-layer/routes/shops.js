@@ -15,6 +15,7 @@ router.get('/usershops', function(req, res) {
 router.post('/addshop', function (req, res) {
 
     var shop = {
+        username: req.body.username,
         shopid : crypto.randomBytes(16).toString("hex"),
         shopName: req.body.shopname,
         shopOwner: req.body.shopowner,
@@ -24,13 +25,13 @@ router.post('/addshop', function (req, res) {
     };
 
     if (shop.shopid) {
-        console.log("$$$$$$$",shop.shopid)
+        console.log("$$$$$$$",shop.shopid,shop.username);
         DatabaseClient.AddShop(shop, (result) => {
             res.send(result);
         });
     }
     else {
-        res.send(auth)
+        res.send({code: 907, message:"can't preocess data"});
     }
 
 });
