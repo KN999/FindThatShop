@@ -78,7 +78,7 @@ exports.UserShops = (username, callback) => {
 
 exports.GetShop = (shopid, callback) => {
     mongodb.connect(url, function (err, client) {
-
+        console.log("%%%%%%%%%%%",shopid)
         assert.equal(null, err);
         var db = client.db('shopkeeper');
         var result = {
