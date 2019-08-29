@@ -6,7 +6,7 @@ import Register from '../Register/Register';
 import Dashboard from '../Dashboard/Dashboard';
 import Logout from '../Logout/Logout'
 import UserShops from '../UserShops/UserShops'
-import Getshop from '../Getshop/Getshop'
+import Getshop from '../Getshops/Getshop'
 import './App.css';
 import {
   BrowserRouter as Router,
