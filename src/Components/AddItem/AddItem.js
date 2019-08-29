@@ -32,7 +32,6 @@ export default class AddItem extends React.Component {
     }
 
     onSubmit = (event) => {
-        event.preventDefault()
         var item = {
             shopid: this.props.shopid,
             itemname: this.state.itemname,
@@ -40,15 +39,23 @@ export default class AddItem extends React.Component {
             price: this.state.price,
             mass : this.state.mass,
         }
+        event.preventDefault();
+        if(this.state.itemname !== "" && this.state.price !== "") {
+                
+            additem(item, (redirect) => {
+                this.props.onClick()
+                if(redirect === 0) {
+                    this.setState({
+                        redirect : true
+                    });
+                }
+            })
+        }
+        else {
+            
+            alert("Need atleast Item Name and Price");
+        }
         
-        additem(item, (redirect) => {
-            this.props.onClick()
-            if(redirect === 0) {
-                this.setState({
-                    redirect : true
-                });
-            }
-        })
     };
     onChange = (event) => {
         this.setState({
