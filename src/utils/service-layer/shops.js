@@ -50,3 +50,28 @@ export function usershops(token, callback) {
       });
     
 }
+
+export function getshop(shopid, callback) {
+  axios.get('/shop/getshop', { params :{
+      shopid: shopid,
+    }})
+    .then( (response) => {
+      
+      if(response.data.code === 404) 
+      {  
+          console.log('got the response', response)
+          callback(response)
+      }
+      else 
+      {
+         //localStorage.setItem('LoginToken', JSON.stringify(response.data))
+         console.log("ERROR",response.data.message);
+      }
+    })
+    .catch(function (error) {
+      
+      alert('error')
+      console.log(error);
+    });
+  
+}

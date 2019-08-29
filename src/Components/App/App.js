@@ -6,6 +6,7 @@ import Register from '../Register/Register';
 import Dashboard from '../Dashboard/Dashboard';
 import Logout from '../Logout/Logout'
 import GetShop from '../GetShop/GetShop'
+import Getshop from '../Getshop2/Getshop'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -28,6 +29,7 @@ export default class App extends Component {
             <Route exact path='/' component={Homepage} />
             <Route path='/Register' component={Register} />
             <Route path='/Login' component={Login} />
+            <Route path="/Getshop" component={Getshop} />
             <PrivateRoute authed={Boolean(localStorage.getItem('Token'))} exact path='/Dashboard' component={Dashboard} />
           </div> 
         </Router>

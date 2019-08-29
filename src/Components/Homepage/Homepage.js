@@ -21,6 +21,7 @@ function Shops(props) {
         shop.items.map(item=> {
             if(item.itemName === query)
             {
+                item.shopid = shop.shopid;
                 qshops.push(item);
                 console.log("KLKLKLKLL",qshops)
             }
@@ -102,7 +103,7 @@ export default class Homepage extends React.Component {
         const Redirect = (shopid) => {
             const { history } = this.props;
             history.push({
-                    pathname: '/Dashboard/getshop/',
+                    pathname: '/Getshop/',
                     search: '?shopid='+{shopid},
                     state: { shopid: shopid }
                   })

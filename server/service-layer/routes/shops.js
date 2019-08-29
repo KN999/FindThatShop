@@ -6,8 +6,13 @@ var DatabaseClient = require('../../database-layer/shops');
 var Token = require('../../business-layer/Auth');
 
 router.get('/usershops', function(req, res) {
-    var username = req.query.token;
-    DatabaseClient.UserShops(username, (result) => {
+    DatabaseClient.UserShops(req.query.token, (result) => {
+        res.send(result);
+    })
+})
+
+router.get('/getshop', function(req, res) {
+    DatabaseClient.GetShop(req.query.shopid, (result)=> {
         res.send(result);
     })
 })

@@ -76,31 +76,25 @@ exports.UserShops = (username, callback) => {
     });
 }
 
-exports.GetShop = (shopids, callback) => {
+exports.GetShop = (shopid, callback) => {
     mongodb.connect(url, function (err, client) {
-
+        console.log("%%%%%%%%%%%",shopid)
         assert.equal(null, err);
         var db = client.db('shopkeeper');
         var result = {
-            code : 405, // No shops Found
+            code : 405, // No shops added
             message : "No shop found",
         };
 
-        var shops = [];
-
-        shopids.forEach(function(shopid) {
-            db.collection('shop').find({ shopid: shopid }).forEach(function (dbshop) {
-                if (dbshop) {
-                    result.code = 404; // Success in retrieving data
-                    result.message = "Data found";
-                    shops.push(dbshop);
-                    result.shop = shops;
-                }
-            })
+        // Find the userShop delete it and add it to 
+        db.collection('shop').find({"shops.shopid": shopid}).forEach(function (dbshop) {
+            if (dbshop) {
+                result.code = 404; // Success in retrieving data
+                result.message = "Data found";
+                result.shop = dbshop;
+            }
         },() => {
-            console.log("$$$$$$$$",result.shop)
-            callback(result);
+                callback(result);
         })
-        
     });
 }
