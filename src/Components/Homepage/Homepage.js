@@ -6,7 +6,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
-import ShopImage from '../../utils/assets/shop.jpg'
 import ItemImage from '../../utils/assets/item.jpg'
 import './Homepage.css';
 
