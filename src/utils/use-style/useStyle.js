@@ -11,7 +11,7 @@ export const useStyles = makeStyles(theme => ({
     },
     paper2: {
         padding: theme.spacing(2),
-        margin: 'auto',
+        margin: 'auto auto 20px auto',
         maxWidth: 160
     },
     paper3: {
