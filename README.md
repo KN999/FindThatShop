@@ -15,6 +15,10 @@ Customer can search the item he or she is looking for.
 <br><br>
 ![Search](./public/Search.png)
 <br><br>
+Customer can view details of the shop that has the item like shopname, address, phone no., etc.
+<br><br>
+![Search](./public/GetShop.png)
+<br><br>
 
 Shop Owner needs to Register thier shops in order to let customer view thier details. Shop owner can Manage their Shops easily with this.
 
