@@ -100,7 +100,7 @@ class Dashboard extends React.Component {
         const Redirect = (shopid) => {
             const { history } = this.props;
             history.push({
-                    pathname: '/Dashboard/getshop/',
+                    pathname: '/Dashboard/Usershops/',
                     search: '?shopid='+{shopid},
                     state: { shopid: shopid }
                   })

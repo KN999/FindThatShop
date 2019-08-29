@@ -1,100 +1,81 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import ItemImage from '../../utils/assets/item.jpg'
-import { getitem } from '../../utils/service-layer/inventory'
-import AddImage from '../../utils/assets/addSign.png'
-import AddItem from '../AddItem/AddItem'
+import ShopImage from '../../utils/assets/shop.jpg'
 import { useStyles } from '../../utils/use-style/useStyle'
-import './GetShop.css'
+import { getshop } from '../../utils/service-layer/shops'
 
-function AddItemButton (props) {
-    const classes = useStyles();
-    return (
-        <Paper className={classes.paper2}>
-            <Grid container spacing={1} >
-                <Grid item>
-                    <ButtonBase className={classes.image} onClick={props.onClick}>
-                        <img className={classes.img} alt="complex" src={AddImage} />
-                    </ButtonBase>
-                </Grid>
-            </Grid>
-        </Paper>
-    )
-}
-
-function Items(props) {
+function Shops(props) {
 
     const classes = useStyles();
-    const [additem, setadditem] = useState(false);
+    const shopid = props.shopid;
+    let rshop = [];
+
+    props.shops.map(shop => {
+            if(shop.shopid === shopid)
+            {
+                rshop = shop;
+            }
+    
+    })
+    
 
     return (
         <div className="makeStyles-root-1 row">
-            {props.items.map(Item=>(
-                <Paper className={classes.paper3}>
+            <Paper className={classes.paper3}>
                 <Grid container spacing={2}>
                 <Grid item>
                     <ButtonBase className={classes.image}>
-                    <img className={classes.img} alt="complex" src={ItemImage} />
+                    <img className={classes.img} alt="complex" src={ShopImage} />
                     </ButtonBase>
                 </Grid>
                 <Grid item xs={12} sm container className="text-align-left">
                     <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
                         <Typography gutterBottom variant="subtitle1">
-                            <legend> {Item.itemName}</legend>
+                            <legend> {rshop.shopName}</legend>
                         </Typography>
                         <Typography gutterBottom variant="subtitle1">
-                            Mass : {Item.itemMass}
+                            Shop Owner : {rshop.shopOwner}
                         </Typography>
                         <Typography gutterBottom variant="subtitle1">
-                            Quantity : {Item.itemQuantity}
+                            Shop Address : {rshop.shopAddress}
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle1">
+                            Contact No. : {rshop.shopContactNo}
                         </Typography>
                     </Grid>
-                    </Grid>
-                    <Grid item>
-                    <Typography variant="subtitle1">₹{Item.itemPrice}</Typography>
                     </Grid>
                 </Grid>
                 </Grid>
             </Paper>
-            ))} 
-            {additem === true ? <AddItem onClick={ () => setadditem(false)} shopid={props.shopid}/> : <AddItemButton onClick={ () => setadditem(true) }/>}
         </div>
     );
 }
   
-export default class GetShop extends React.Component {
+export default class Getshop extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
             shopid:'',
             shops : [],
-            items : []
         }
     }
 
     componentDidMount() {
         var self = this
-
-        getitem(this.props.location.state.shopid, (response) => {
-            self.setState({items: response.data.item.items})
+        console.log("shopid&&&&&&&&&", this.props.location.state.shopid)
+        getshop(this.props.location.state.shopid, (response) => {
+            self.setState({shops: response.data.shop.shops})
         })
-    }
-
-    onChange = (event) => {
-        this.setState({
-            [event.target.name] : event.target.value,
-        });
-        
     }
 
     render() {
         return(
             <div className="margin-top-50px">
-                <Items items={this.state.items} shopid = {this.props.location.state.shopid}/>
+                <Shops shops={this.state.shops} shopid = {this.props.location.state.shopid}/>
             </div>
         )
     }

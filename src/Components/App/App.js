@@ -5,8 +5,8 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Dashboard from '../Dashboard/Dashboard';
 import Logout from '../Logout/Logout'
-import GetShop from '../GetShop/GetShop'
-import Getshop from '../Getshop2/Getshop'
+import UserShops from '../UserShops/UserShops'
+import Getshop from '../Getshop/Getshop'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -24,7 +24,7 @@ export default class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
-            <PrivateRoute authed={Boolean(localStorage.getItem('Token'))} exact path='/Dashboard/getshop' component={GetShop} />
+            <PrivateRoute authed={Boolean(localStorage.getItem('Token'))} exact path='/Dashboard/Usershops' component={UserShops} />
             <Route exact path='/Logout' component={Logout} /> 
             <Route exact path='/' component={Homepage} />
             <Route path='/Register' component={Register} />
