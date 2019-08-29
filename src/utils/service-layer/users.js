@@ -16,9 +16,12 @@ export function register(user, callback) {
             console.log(")))))))))))))",localStorage.getItem('Token'))
             callback(0)
         }
+        else if (response.data.code === 300) {
+          alert("Username already taken");
+        }
         else 
         {
-            console.log("ERROR",response.data.message);
+            console.log("ERROR",response.data);
         }
       })
       .catch(function (error) {
@@ -43,6 +46,7 @@ export function login(user, callback) {
         else 
         {
             console.log("ERROR",response.data.message);
+            alert("Username or Password is incorrect");
         }
       })
       .catch(function (error) {

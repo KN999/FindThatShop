@@ -27,14 +27,14 @@ class Register extends Component {
     onSubmit = (event) => {
         event.preventDefault()
 
-        var user = {
-            username : this.state.username,
-            name : this.state.name,
-            password : this.state.password,
-            email : this.state.email,
-        }
+        if (this.state.password === this.state.confirmpassword && this.state.password != "") {
+            var user = {
+                username : this.state.username,
+                name : this.state.name,
+                password : this.state.password,
+                email : this.state.email,
+            }
 
-        if (this.state.password === this.state.confirmpassword) {
             register(user, (redirect) => {
                 if(redirect === 0) {
                     this.setState({
@@ -51,6 +51,22 @@ class Register extends Component {
 
     render () 
     {
+        const {
+            username,
+            name,
+            password,
+            confirmpassword,
+            email,
+            error,
+          } = this.state;
+      
+
+        const isInvalid =
+        name === '' ||
+        username === ''||
+        password === '' ||
+        email === '';
+
         const { history } = this.props;
         
         if (this.state.redirect == true)
@@ -77,8 +93,8 @@ class Register extends Component {
                 <div className="form-group width-30">
                     <input type='email' name='email' placeholder='Email' className='form-control'  onChange={this.onChange}/>
                 </div>
-                <button className='btn btn-primary' type='submit'>Register</button>
-                
+                <button disabled={isInvalid} className='btn btn-primary' type='submit'>Register</button>
+                {error && <p>{error.message}</p>}
             </form>
         </div>
         );

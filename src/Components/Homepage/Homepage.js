@@ -88,12 +88,19 @@ export default class Homepage extends React.Component {
 
     onSubmit = (event) => {
         event.preventDefault()
-        var thing = this.state.thing;
-        var self = this;
-        FindThatShop(thing, (response)=>{
-            console.log(response);
-            self.setState({ shops: response.data.shop })
-        })
+        if(this.state.thing !== '')
+        {
+            var thing = this.state.thing;
+            var self = this;
+            FindThatShop(thing, (response)=>{
+                console.log(response);
+                self.setState({ shops: response.data.shop })
+            })
+        }
+        else
+        {
+            alert("search query is empty!");
+        }
         
     };
 

@@ -29,23 +29,30 @@ export default class AddShop extends React.Component {
     }
 
     onSubmit = (event) => {
-        event.preventDefault()
-        var shop = {
-            token : localStorage.getItem('Token'),
-            shopname: this.state.shopname,
-            shopowner: this.state.shopowner,
-            shopaddress: this.state.shopaddress,
-            shopcontactno: this.state.shopcontactno,
-        }
+
+        if(this.state.shopname !== "" && this.state.shopowner!=="" && this.state.shopaddress!=="" && this.state.shopcontactno!==""){
         
-        addshop(shop, (redirect) => {
-            this.props.onClick()
-            if(redirect === 0) {
-                this.setState({
-                    redirect : true
-                });
+            var shop = {
+                token : localStorage.getItem('Token'),
+                shopname: this.state.shopname,
+                shopowner: this.state.shopowner,
+                shopaddress: this.state.shopaddress,
+                shopcontactno: this.state.shopcontactno,
             }
-        })
+            
+            addshop(shop, (redirect) => {
+                this.props.onClick()
+                if(redirect === 0) {
+                    this.setState({
+                        redirect : true
+                    });
+                }
+            })
+        }
+        else {
+            event.preventDefault()
+            alert("Need to fill all details.");
+        }
     };
 
     render() {
