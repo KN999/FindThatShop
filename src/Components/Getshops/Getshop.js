@@ -17,9 +17,7 @@ function Shops(props) {
         if (shop.shopid === shopid) {
             rshop = shop;
         }
-
     })
-
 
     return (
         <div className="makeStyles-root-1 row">

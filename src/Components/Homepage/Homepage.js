@@ -135,14 +135,3 @@ export default class Homepage extends React.Component {
         )
     };
 }
-
-
-
-function Result(props) {
-    return(
-        <div>
-            {props.item}
-            {console.log("KLKLKLKKLKLKL",props.item)}
-        </div>
-    )
-}

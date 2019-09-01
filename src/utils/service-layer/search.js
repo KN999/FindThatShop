@@ -13,7 +13,7 @@ export function FindThatShop(userquery, callback) {
         }
         else 
         {
-           //localStorage.setItem('LoginToken', JSON.stringify(response.data))
+           alert(response.data.message);
            console.log("ERROR",response.data.message);
         }
       })
