@@ -1,18 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var mongodb = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
-var url = 'mongodb://127.0.0.1:27017/';
+const uri = "mongodb+srv://navin:navin@findthatshop-qbdo0.mongodb.net/test?retryWrites=true&w=majority";
 
 var Token = require('../business-layer/Auth');
 
 exports.ValidateUser = function (user, callback) {
 
-    mongodb.connect(url, function (err, client) {
-
+    MongoClient.connect(uri, function (err, client) {
         assert.equal(null, err);
-
         var db = client.db('shopkeeper');
         var result = {};
 
@@ -41,10 +37,8 @@ exports.ValidateUser = function (user, callback) {
 }
 
 exports.CheckUsername = (username, callback) => {
-    mongodb.connect(url, function (err, client) {
-
+    MongoClient.connect(uri, function (err, client) {
         assert.equal(null, err);
-
         var db = client.db('shopkeeper');
         var result = {};
 
@@ -75,10 +69,8 @@ exports.RegisterUser = (user, callback) => {
 
     var token = user.username;
 
-    mongodb.connect(url, function (err, client) {
-
+    MongoClient.connect(uri, function (err, client) {
         assert.equal(null, err);
-
         var db = client.db('shopkeeper');
         var result = {};
     

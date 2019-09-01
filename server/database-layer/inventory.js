@@ -1,14 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var mongodb = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
-var url = 'mongodb://127.0.0.1:27017/';
+const uri = "mongodb+srv://navin:navin@findthatshop-qbdo0.mongodb.net/test?retryWrites=true&w=majority";
 
 exports.AddItem = (itemDetails, callback) => {
 
-    mongodb.connect(url, function (err, client) {
-
+    MongoClient.connect(uri, function (err, client) {
         assert.equal(null, err);
         console.log(itemDetails)
         var item =  {
@@ -57,8 +54,8 @@ exports.AddItem = (itemDetails, callback) => {
 }
 
 exports.GetItems = (shopid, callback) => {
-    mongodb.connect(url, function (err, client) {
 
+    MongoClient.connect(uri, function (err, client) {
         assert.equal(null, err);
         console.log("^^^^^^^^^^^^",shopid)
         var db = client.db('shopkeeper');
