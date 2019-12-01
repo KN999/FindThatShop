@@ -2,14 +2,16 @@
 
 # dependencies
 /node_modules
+/client/node_modules
+/client/New folder
+/New folder
 /.pnp
 .pnp.js
-/server/node_modules
 
 # testing
 /coverage
 
-# production
+# production build
 /build
 
 # misc
