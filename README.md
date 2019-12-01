@@ -1,4 +1,5 @@
-# FindThatShop
+# FindThatShop 
+## Do checkout the website - (https://findthatshop.herokuapp.com/)
 
 FindThatShop find the shops that are nearby and give you the list of shops that has the item you searched.<br><br>
 There will be two types of people that will use this - 
