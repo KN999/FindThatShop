@@ -1,6 +1,8 @@
 # FindThatShop 
 ## Do checkout the website - (https://findthatshop.herokuapp.com/)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3f78a78640d343ee826fdb03c6275dbd)](https://app.codacy.com/app/KN999/FindThatShop?utm_source=github.com&utm_medium=referral&utm_content=KN999/FindThatShop&utm_campaign=Badge_Grade_Dashboard)
+
 FindThatShop find the shops that are nearby and give you the list of shops that has the item you searched.<br><br>
 There will be two types of people that will use this - 
 * Customer
